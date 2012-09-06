@@ -11,7 +11,6 @@ var pressed_space = false;
 function down (event) {
 
 
-    if (event && chars.jim.state != 'defeated' && chars.jim.draw){
         var key = event.keyCode;
 
         switch (key) {
@@ -28,22 +27,14 @@ function down (event) {
 
 case 65: // A
 
-            if (chars.jim.suit == 'labcoat') {
-                chars.jim.img.src = "./content/images/aang_left.png";
-            } else if (chars.jim.suit == 'flightsuit') {
-                chars.jim.img.src = "./content/images/aang_fly_left.png";
-            }
+            
             pressed_left = true;
         break;
 
          
 
 case 37: // left arrow
-            if (chars.jim.suit == 'labcoat') {
-                chars.jim.img.src = "./content/images/aang_left.png";
-            } else if (chars.jim.suit == 'flightsuit') {
-                chars.jim.img.src = "./content/images/aang_fly_left.png";
-            }
+            
             pressed_left = true;
         break;
 
@@ -51,21 +42,12 @@ case 37: // left arrow
 
 
         case 68: // D
-            if (chars.jim.suit == 'labcoat') {
-                chars.jim.img.src = "./content/images/aang_right.png";
-            } else if (chars.jim.suit == 'flightsuit') {
-                chars.jim.img.src = "./content/images/aang_fly_right.png";
-            }
+            
             pressed_right= true;
     
     break;
 
         case 39: // D
-            if (chars.jim.suit == 'labcoat') {
-                chars.jim.img.src = "./content/images/aang_right.png";
-            } else if (chars.jim.suit == 'flightsuit') {
-                chars.jim.img.src = "./content/images/aang_fly_right.png";
-            }
             pressed_right= true;
     
     break;
@@ -88,32 +70,20 @@ break;
         case 32: // Space bar : SCIENCE BEAM
         pressed_space = true;
 
-        for (var i in npcs) {
-            if (npcs[i].draw && npcs[i].role == 'enemy' & chars.jim.ammo > 0){
-                chars.jim.beam = true;
-                //snd_hit.play();
-            } 
-        }
         break;
         case 70: // f : SCIENCE BEAM
         pressed_space = true;
 
-        for (var i in npcs) {
-            if (npcs[i].draw && npcs[i].role == 'enemy' & chars.jim.ammo > 0){
-                chars.jim.beam = true;
-                //snd_hit.play();
-            } 
-        }
+        
         break;
 
     }
-}
+
 }
 
 function up (event) {
 
 
-    if (event && chars.jim.state != 'defeated' && chars.jim.draw){
         var key = event.keyCode;
 
         switch (key) {
@@ -161,13 +131,11 @@ break;
 
         case 32: // Space bar : SCIENCE BEAM
         pressed_space = false;
-        chars.jim.beam = false;
         break;
         case 70: // f : SCIENCE BEAM
         pressed_space = false;
-        chars.jim.beam = false;
         break;
 
     }
-}
+
 }
