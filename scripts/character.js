@@ -19,12 +19,7 @@ character = function(character_location,appearance,base_stats,combat_stats){
 
     //roles (enemy,quest,inactive,tutorial)
     this.role = base_stats.role;
-    //conversation
-    this.text = base_stats.text;
-    //leveling
-    this.xp = base_stats.xp;
-    //quest tracking
-    this.contact = base_stats.contact;
+    
 
     //defensive combat stats
     this.state = combat_stats.state;
@@ -50,12 +45,6 @@ base_stats = function(speed,role,text,contact,xp){
 
     //roles (enemy,quest,inactive,tutorial)
     this.role = role;
-    //conversation
-    this.text = text;
-    //leveling
-    this.xp = xp;
-    //quest tracking
-    this.contact = contact;
 }
 
 combat_stats = function(state,hp,max_hp,hp_regen_rate,hp_regen_baseline,shield,max_shield,shield_regen_rate,
@@ -88,10 +77,7 @@ appearance = function(height,width,src,defeated_src,suit){
 //collison
     this.height = height;
     this.width = width;
-    //display
-    //this.img = new Image();
-    //this.img_defeated = new Image();
     this.src = src;
     this.defeated_src = defeated_src;
-    this.suit = suit;
+//    this.suit = suit;
 }
