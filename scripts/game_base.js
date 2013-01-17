@@ -7,7 +7,7 @@ game_base.run = function () {
 
 
 game_base.update = function(event) {
-
+//player unit spawning
   if (pressed_right && player_cooldown > 50){
     var chars_loc = new character_location(true,50,505,"lobby");
     var chars_appearance = new appearance(256,256,"./content/images/scientist.png","./content/images/scientist.png","labcoat");
@@ -19,7 +19,30 @@ game_base.update = function(event) {
     chars_count++;
     player_cooldown = 0;
   }
-  if (turn_count % 200 == 0 && npcs_count < 100){
+  if (pressed_up && player_cooldown > 50){
+    var chars_loc = new character_location(true,50,455,"lobby");
+    var chars_appearance = new appearance(256,256,"./content/images/flying_scientist.png","./content/images/flying_scientist.png","labcoat");
+    var chars_stats= new base_stats(6,"hero","rawr",false,0);
+    var chars_combat_stats = new combat_stats("active",100,100,1,25,25,25,1,200,false,3,3);
+
+    var char = new character (chars_loc,chars_appearance,chars_stats,chars_combat_stats);
+    chars[chars_count] = char;
+    chars_count++;
+    player_cooldown = 0;
+  }
+  if (pressed_down && player_cooldown > 50){
+    var chars_loc = new character_location(true,50,555,"lobby");
+    var chars_appearance = new appearance(256,256,"./content/images/armor_scientist.png","./content/images/armor_scientist.png","labcoat");
+    var chars_stats= new base_stats(1,"hero","rawr",false,0);
+    var chars_combat_stats = new combat_stats("active",200,200,1,25,25,25,1,200,false,3,6);
+
+    var char = new character (chars_loc,chars_appearance,chars_stats,chars_combat_stats);
+    chars[chars_count] = char;
+    chars_count++;
+    player_cooldown = 0;
+  }
+//enemy unit spawning
+  if (turn_count % 100 == 0 && npcs_count < 100){
     var npcs_loc = new character_location(true,3150,505,"lobby");
     var npcs_appearance = new appearance(256,256,"./content/images/evil_scientist.png","./content/images/evil_scientist.png","labcoat");
     var npcs_stats= new base_stats(2,"hero","rawr",false,0);
