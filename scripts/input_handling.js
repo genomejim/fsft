@@ -7,6 +7,10 @@ var pressed_down = false;
 var pressed_right = false;
 var pressed_left = false;
 var pressed_space = false;
+var pressed_q = false;
+var pressed_e = false;
+var pressed_space = false;
+
 
 function down (event) {
 
@@ -72,10 +76,21 @@ break;
 
         break;
         case 70: // f : SCIENCE BEAM
-        pressed_space = true;
-
-        
+        pressed_space = true;  
         break;
+        
+        case 81: // q 
+        pressed_q = true;  
+        break;
+
+        case 69: // e 
+        pressed_e = true;  
+        break;
+
+        case 32: // space 
+        pressed_space = true;  
+        break;
+
 
     }
 
@@ -134,6 +149,18 @@ break;
         break;
         case 70: // f : SCIENCE BEAM
         pressed_space = false;
+        break;
+
+        case 81: // q 
+        pressed_q = false;  
+        break;
+
+        case 69: // e 
+        pressed_e = false;  
+        break;
+
+        case 32: // space 
+        pressed_space = false;  
         break;
 
     }
