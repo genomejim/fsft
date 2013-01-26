@@ -16,15 +16,13 @@ game_base.run = function () {
 game_base.update = function(event) {
 
 //player unit spawning
+
   var scientist_cooldown = 30;
   var scientist_cost = 5;
-  var scientist_hp = 100;
-  var scientist_damage = 3;
-  
+
   var flying_scientist_cooldown = 30;
   var flying_scientist_cost = 7;
-  var flying_scientist_hp = 75;
-  var flying_scientist_damage = 5;
+ 
 
   var armor_scientist_cooldown = 20;
   var armor_scientist_cost = 10;
@@ -53,30 +51,12 @@ game_base.update = function(event) {
 
 
   if (pressed_right && player_cooldown > scientist_cooldown && science > scientist_cost -1){
-    var chars_loc = new character_location(true,50,505,"lobby");
-    var chars_appearance = new appearance(24,24,"./content/images/scientist_24.png","./content/images/scientist_24.png","labcoat");
-    var chars_stats= new base_stats(2,"hero","rawr",false,0);
-    var chars_combat_stats = new combat_stats("active",scientist_hp,scientist_hp,1,25,25,25,1,200,false,3,scientist_damage);
-
-    var char = new character (chars_loc,chars_appearance,chars_stats,chars_combat_stats);
-    chars[chars_count] = char;
-    chars_count++;
-    player_cooldown = 0;
-    science = science - scientist_cost;
-    active_chars_count++;
+    //I should probably extract a spawn_unit function and pass crap to that....I also need to make some decisions about what parts of the 
+    //character class that came over from the fsf the action rpg can go now...
+    spawn_scientist();
   }
   if (pressed_up && player_cooldown > flying_scientist_cooldown && science > flying_scientist_cost - 1){
-    var chars_loc = new character_location(true,50,505,"lobby");
-    var chars_appearance = new appearance(24,24,"./content/images/flying_scientist_24.png","./content/images/flying_scientist_24.png","labcoat");
-    var chars_stats= new base_stats(4,"hero","rawr",false,0);
-    var chars_combat_stats = new combat_stats("active",flying_scientist_hp,flying_scientist_hp,1,25,25,25,1,200,false,3,flying_scientist_damage);
-
-    var char = new character (chars_loc,chars_appearance,chars_stats,chars_combat_stats);
-    chars[chars_count] = char;
-    chars_count++;
-    player_cooldown = 0;
-    science = science - flying_scientist_cost;
-    active_chars_count++;
+    spawn_flying_scientist();
   }
   if (pressed_down && player_cooldown > armor_scientist_cooldown && science > armor_scientist_cost -1){
     var chars_loc = new character_location(true,50,505,"lobby");
@@ -390,7 +370,7 @@ game_base.draw = function() {
   }
  
 
-  //if (turn_count % 20 == 0) {
+  //if (turn_count % 30 == 0) {
   for (var k in collisions) {
     if (collisions[k].display_time > 0) {
       _canvasBufferContext.strokeStyle = 'rgba(200, 0, 0, 0.25)';
@@ -411,3 +391,39 @@ game_base.draw = function() {
 
 
 game_base._intervalID = setInterval(game_base.run, 1000 / game_base.fps);
+
+spawn_scientist = function (){
+    var scientist_cost = 5;
+    var scientist_hp = 100;
+    var scientist_damage = 3;
+    
+    var chars_loc = new character_location(true,50,505,"lobby");
+    var chars_appearance = new appearance(24,24,"./content/images/scientist_24.png","./content/images/scientist_24.png","labcoat");
+    var chars_stats= new base_stats(2,"hero","rawr",false,0);
+    var chars_combat_stats = new combat_stats("active",scientist_hp,scientist_hp,1,25,25,25,1,200,false,3,scientist_damage);
+
+    var char = new character (chars_loc,chars_appearance,chars_stats,chars_combat_stats);
+    chars[chars_count] = char;
+    chars_count++;
+    player_cooldown = 0;
+    science = science - scientist_cost;
+    active_chars_count++;
+}
+
+spawn_flying_scientist = function () {
+    var flying_scientist_cost = 7;
+    var flying_scientist_hp = 75;
+    var flying_scientist_damage = 5;
+
+    var chars_loc = new character_location(true,50,505,"lobby");
+    var chars_appearance = new appearance(24,24,"./content/images/flying_scientist_24.png","./content/images/flying_scientist_24.png","labcoat");
+    var chars_stats= new base_stats(4,"hero","rawr",false,0);
+    var chars_combat_stats = new combat_stats("active",flying_scientist_hp,flying_scientist_hp,1,25,25,25,1,200,false,3,flying_scientist_damage);
+
+    var char = new character (chars_loc,chars_appearance,chars_stats,chars_combat_stats);
+    chars[chars_count] = char;
+    chars_count++;
+    player_cooldown = 0;
+    science = science - flying_scientist_cost;
+    active_chars_count++;
+}
