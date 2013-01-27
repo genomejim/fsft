@@ -26,7 +26,7 @@ game_base.update = function(event) {
 
 // spawn sciene_trooper
   if (pressed_down && player_cooldown > science_trooper_cooldown && science > science_trooper_cost -1){
-    var char = new unit (50,505,science_trooper_speed,24,24,"./content/images/science_trooper.png",science_trooper_hp,science_trooper_damage);
+    var char = new unit (50,505,science_trooper_speed,48,48,"./content/images/science_trooper.png",science_trooper_hp,science_trooper_damage);
     add_unit(char);
     science = science - science_trooper_cost;    
   }
@@ -98,7 +98,7 @@ if (lair.hp > 0) {
   if (turn_count % 50 == 0 && active_npcs_count < 52){
     //spawn beast
     if (Math.random() * superstition > 150){
-      var npc = new unit (1024,505,giant_trooper_speed,24,24,"./content/images/evil_giant_trooper.png",giant_trooper_hp,giant_trooper_damage);
+      var npc = new unit (1024,505,giant_trooper_speed,96,96,"./content/images/evil_giant_trooper.png",giant_trooper_hp,giant_trooper_damage);
       add_enemy_unit(npc);
       superstition = superstition - giant_trooper_cost;        
     }
