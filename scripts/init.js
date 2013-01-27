@@ -68,7 +68,7 @@
   var rocket_speed = 15;
 
   var beast_cooldown = 1;
-  var beast_cost = 150;
+  var beast_cost = 250;
   var beast_hp = 700;
   var beast_damage = 15;
   var beast_speed = 5;

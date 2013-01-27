@@ -109,7 +109,7 @@ if (turn_count % 10 == 0  ){
 
 if (turn_count % 60 == 0 && npcs_count < 10000){
     //spawn evil beast
-    if (Math.random() * superstition > 174 && active_npcs_count < 57){   
+    if (Math.random() * superstition > beast_cost - 1  && active_npcs_count < 57){   
       var npc = new unit (1024,505,beast_speed,48,48,"./content/images/beast.png",beast_hp,beast_damage);
       add_enemy_unit(npc);
       superstition = superstition - beast_cost;        
@@ -122,7 +122,7 @@ if (turn_count % 100 == 0 && npcs_count < 10000){
     if (Math.random()  > .75){
       var npc = new unit (1024,505,rocket_speed,24,24,"./content/images/rocket.png",rocket_hp,rocket_damage);
       add_enemy_unit(npc);
-      superstition = superstition - scientist_cost;        
+      superstition = superstition - rocket_cost;        
     }
   }
 
@@ -233,7 +233,7 @@ game_base.draw = function() {
     _canvasBufferContext.fillStyle = 'rgba(0, 500, 0, 0.5)';
     _canvasBufferContext.font="bold 30px sans-serif";
     _canvasBufferContext.fillText("SCIENCE PREVAILS!", 375, 375);
-    _canvasBufferContext.font="15px";
+    _canvasBufferContext.font="bold 15px sans-serif";
     
   }
   if (turn_count < 500) {
