@@ -96,9 +96,9 @@ if (lair.hp > 0) {
     }
   }
   if (turn_count % 50 == 0 && active_npcs_count < 52){
-    //spawn beast
+    //spawn giant trooper
     if (Math.random() * superstition > 150){
-      var npc = new unit (1024,505,giant_trooper_speed,96,96,"./content/images/evil_giant_trooper.png",giant_trooper_hp,giant_trooper_damage);
+      var npc = new unit (1024,505,giant_trooper_speed,96,48,"./content/images/evil_giant_robot.png",giant_trooper_hp,giant_trooper_damage);
       add_enemy_unit(npc);
       superstition = superstition - giant_trooper_cost;        
     }
@@ -124,11 +124,19 @@ if (turn_count % 10 == 0  ){
 
 if (turn_count % 60 == 0 && npcs_count < 10000){
     //spawn evil beast
+  if (Math.random() > .5){
     if (Math.random() * superstition > beast_cost - 1  && active_npcs_count < 57){   
       var npc = new unit (1024,505,beast_speed,48,48,"./content/images/beast.png",beast_hp,beast_damage);
       add_enemy_unit(npc);
       superstition = superstition - beast_cost;        
     }
+  } else { 
+    if (Math.random() * superstition > beast_cost - 1  && active_npcs_count < 57){   
+      var npc = new unit (1024,505,beast_speed,48,48,"./content/images/mole.png",beast_hp,beast_damage);
+      add_enemy_unit(npc);
+      superstition = superstition - beast_cost;        
+    }
+  }
   }
 
 
@@ -211,7 +219,7 @@ game_base.draw = function() {
   _canvasContext.clearRect(0,0,_canvas.width,_canvas.height);
   _canvasBufferContext.clearRect(0,0,_canvas.width,_canvas.height);
 
-  //draw active scene       
+  //draw background image       
   _canvasBufferContext.drawImage(back, 0, 0);              
 
 //draw HUD
@@ -290,8 +298,8 @@ game_base.draw = function() {
     } else {
         delete collisions[k];
     }
-    }
-  //}	
+  }
+  	
   _canvasContext.drawImage(_canvasBuffer, 0 , 0);	
 }
 
