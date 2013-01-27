@@ -70,6 +70,10 @@ if (lair.hp > 0) {
       var npc = new unit (1024,505,Math.random() * scientist_speed,24,24,"./content/images/evil_scientist.png",scientist_hp,scientist_damage);
       add_enemy_unit(npc);
       superstition = superstition - scientist_cost;        
+    } else if (Math.random() * superstition > 85) {
+        var npc = new unit (1024,505,Math.random() * scientist_speed,24,24,"./content/images/bat.png",scientist_hp,scientist_damage);
+        add_enemy_unit(npc);
+        superstition = superstition - scientist_cost;
     }
   }
   if (turn_count % 35 == 0  && active_npcs_count < 40){
