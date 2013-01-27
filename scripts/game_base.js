@@ -66,20 +66,31 @@ if (pressed_space && player_cooldown > rocket_cooldown && science > rocket_cost 
 if (lair.hp > 0) {
   if (turn_count % 30 == 0 && active_npcs_count < 20){
     //spawn evil scientist
-    if (Math.random() * superstition > 85){    
-      var npc = new unit (1024,505,Math.random() * scientist_speed,24,24,"./content/images/evil_scientist.png",scientist_hp,scientist_damage);
-      add_enemy_unit(npc);
-      superstition = superstition - scientist_cost;        
-    } else if (Math.random() * superstition > 85) {
+    if (Math.random() > .5){
+      if (Math.random() * superstition > 85){    
+        var npc = new unit (1024,505,Math.random() * scientist_speed,24,24,"./content/images/evil_scientist.png",scientist_hp,scientist_damage);
+        add_enemy_unit(npc);
+        superstition = superstition - scientist_cost;
+      }
+    } else {        
+      if (Math.random() * superstition > 85) {
+      //spawn bat
         var npc = new unit (1024,505,Math.random() * scientist_speed,24,24,"./content/images/bat.png",scientist_hp,scientist_damage);
         add_enemy_unit(npc);
         superstition = superstition - scientist_cost;
+      }
     }
   }
+  
+
   if (turn_count % 35 == 0  && active_npcs_count < 40){
     //spawn werewolf 
     if (Math.random() * superstition > 90){
       var npc = new unit (1024,505,Math.random() * werewolf_speed,48,48,"./content/images/werewolf.png",werewolf_hp,werewolf_damage);
+      add_enemy_unit(npc);
+      superstition = superstition - werewolf_cost;
+    } else if (Math.random() * superstition > 85) {
+      var npc = new unit (1024,505,Math.random() * werewolf_speed,48,48,"./content/images/vampire.png",werewolf_hp,werewolf_damage);
       add_enemy_unit(npc);
       superstition = superstition - werewolf_cost;
     }
