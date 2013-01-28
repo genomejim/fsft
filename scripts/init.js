@@ -17,72 +17,59 @@
   var collision_count = 0;
   var grogon_text = 0;
 
-// unit definitions
+KEY_CODES = {
+  'SPACE': [32, 70],
+   'LEFT': [37, 65],
+     'UP': [38, 87],
+  'RIGHT': [39, 68],
+   'DOWN': [43, 83],
+      'e': [69],
+      'q': [81],
+};
 
-  var scientist_cost = 5;
-  var scientist_hp = 100;
-  var scientist_damage = 3;
-  var scientist_cooldown = 30;
-  var scientist_speed = 2;
 
-  var flying_scientist_cost = 7;
-  var flying_scientist_hp = 75;
-  var flying_scientist_damage = 5;
-  var flying_scientist_cooldown = 30;
-  var flying_scientist_speed = 4;
- 
-  var science_trooper_cooldown = 20;
-  var science_trooper_cost = 10;
-  var science_trooper_hp = 200;
-  var science_trooper_damage = 4;
-  var science_trooper_speed = 1;
+var get_key_codes = function(characters) {
+/* SPAWN is a hash that describes the characters to spawn by key code
+SPAWN = {
+  39: ['scientist'],
+  68: ['scientist'],
+  ...
+}       */
+  var s = new Object();
+  for (var character_name in characters) {
+    var spawn_keys = characters[character_name].spawn_keys;
+    for (var i in spawn_keys) {
+      var key_codes = KEY_CODES[spawn_keys[i]];
+      for (var j in key_codes) {
+          var key_code = key_codes[j];
+        if (! s[key_code]) {
+          s[key_code] = new Array();
+        }
+        s[key_code].push(character_name);
+      }
+    }
+  }
 
-  var werewolf_cooldown = 20;
-  var werewolf_cost = 10;
-  var werewolf_hp = 200;
-  var werewolf_damage = 4;
-  var werewolf_speed = 1;
+  return s;
+}
 
-  var giant_trooper_cooldown = 10;
-  var giant_trooper_cost = 100;
-  var giant_trooper_hp = 1250;
-  var giant_trooper_damage = 7;
-  var giant_trooper_speed = .2;
-
-  var pylon_cooldown = 20;
-  var pylon_cost = 10;
-  var pylon_hp = 10;
-  var pylon_damage = 1;
-  var pylon_speed = 0;
-
-  var grogon_cooldown = 1;
-  var grogon_cost = 1000;
-  var grogon_hp = 17500;
-  var grogon_damage = 25;
-  var grogon_speed = 2;  
-
-  var rocket_cooldown = 1;
-  var rocket_cost = 5;
-  var rocket_hp = 5;
-  var rocket_damage = 30;
-  var rocket_speed = 15;
-
-  var beast_cooldown = 1;
-  var beast_cost = 250;
-  var beast_hp = 700;
-  var beast_damage = 15;
-  var beast_speed = 5;
+KEYPRESSED = '';  // set to key code when key pressed
+CHR = get_characters();
+SPAWN = get_key_codes(CHR);
 
 // create units that start in play
 // unit params (x,y,speed,height,width,image_src,hp,melee_damage)
 
-  var lab = new unit (25,505,0,96,96,"./content/images/scientist_base.png",500,3);
+/*
+  var lab = new unit("lab");
   chars[chars_count] = lab;
   chars_count++;
-
-  var lair = new unit (1000,505,0,96,96,"./content/images/scientist_base.png",10000,3);
+*/
+  var lab = add_unit('lab');
+  var lair = new unit("lair");
   npcs[npcs_count] = lair;
-  npcs_count++;  
+  npcs_count++;
+
 //background image
   var back = new Image();
   back.src = "./content/images/moon.png";
@@ -104,23 +91,7 @@ _canvasBuffer.height = _canvas.height;
     _canvasBufferContext.textBaseline = 'top';
 }
 
-KEY_NAME = initial_key_mapping();
-KEYPRESSED = '';
+// Entry point here :>
+game_base._intervalID = setInterval(game_base.run, 1000 / game_base.fps);
 
-function initial_key_mapping() {
-return {
-  32: 'SPACE',
-  37: 'LEFT',
-  38: 'UP',
-  39: 'RIGHT',
-  43: 'DOWN',
-  65: 'LEFT',
-  68: 'RIGHT',
-  69: 'e',
-  70: 'SPACE',
-  81: 'q',
-  83: 'DOWN',
-  87: 'UP',
-};
-}
 

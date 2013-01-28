@@ -1,3 +1,5 @@
+
+
 game_base.run = function () {
     game_base.update();
     game_base.draw();
@@ -11,152 +13,69 @@ game_base.update = function(event) {
   melee_combat_detection();
 }
 
-player_unit_spawning() = function(event) {
-/*
-  if (pressed_right && player_cooldown > scientist_cooldown && science > scientist_cost -1){
-    var char = new unit (50,505,scientist_speed,24,24,"./content/images/scientist.png",scientist_hp,scientist_damage);
-    add_unit(char);     
-    science = science - scientist_cost;
+player_unit_spawning = function(event) {
+
+  if (KEYPRESSED != '') {
+    for (var i in SPAWN[KEYPRESSED]) {
+      var character_name = SPAWN[KEYPRESSED][i];
+      add_unit(character_name);
+    }
+    KEYPRESSED = '';
   }
-*/
 }
-
-/*
-game_base.update = function(event) {
-
-//player unit spawning
-
-  
-//unit params (x,y,speed,height,width,image_src,hp,melee_damage)
-// spawn scientist
-  if (pressed_right && player_cooldown > scientist_cooldown && science > scientist_cost -1){
-    var char = new unit (50,505,scientist_speed,24,24,"./content/images/scientist.png",scientist_hp,scientist_damage);
-    add_unit(char);     
-    science = science - scientist_cost;
-  }
-
-// spawn flying scientist
-  if (pressed_up && player_cooldown > flying_scientist_cooldown && science > flying_scientist_cost - 1){
-    var char = new unit (50,505,flying_scientist_speed,24,24,"./content/images/flying_scientist.png",flying_scientist_hp,flying_scientist_damage);
-    add_unit(char);    
-    science = science - flying_scientist_cost;    
-  }
-
-// spawn sciene_trooper
-  if (pressed_down && player_cooldown > science_trooper_cooldown && science > science_trooper_cost -1){
-    var char = new unit (50,505,science_trooper_speed,48,48,"./content/images/science_trooper.png",science_trooper_hp,science_trooper_damage);
-    add_unit(char);
-    science = science - science_trooper_cost;    
-  }
-
-// spawn giant_trooper
-  if (pressed_left && player_cooldown > giant_trooper_cooldown && science > giant_trooper_cost - 1){
-    var char = new unit (50,505,giant_trooper_speed,96,96,"./content/images/giant_trooper.png",giant_trooper_hp,giant_trooper_damage);
-    add_unit(char);
-    science = science - giant_trooper_cost;
-   }
-
-//spawn pylon
-  if (pressed_q && player_cooldown > pylon_cooldown && science > pylon_cost -1 && active_chars_count < 50){
-    var char = new unit (50,505,pylon_speed,24,24,"./content/images/pylon.png",pylon_hp,pylon_damage);
-    add_unit(char);
-    science = science - pylon_cost;
-  }
-
-//spawn grogon
-  if (pressed_e && player_cooldown > grogon_cooldown && science > grogon_cost -1){
-    var char = new unit (50,505,grogon_speed,256,256,"./content/images/grogon.png",grogon_hp,grogon_damage);
-    add_unit(char);
-    science = science - grogon_cost;
-    grogon_text=500;    
-  }
-
-//spawn rocket
-if (pressed_space && player_cooldown > rocket_cooldown && science > rocket_cost -1){
-    var char = new unit (50,505,rocket_speed,24,24,"./content/images/rocket.png",rocket_hp,rocket_damage);
-    add_unit(char);
-    science = science - rocket_cost;
-  }
-
-
-} */
 
 enemy_unit_spawning = function() {
 
-//enemy unit spawning
-
 if (lair.hp > 0) {
   if (turn_count % 30 == 0 && active_npcs_count < 20){
-    //spawn evil scientist
+
     if (Math.random() > .5){
       if (Math.random() * superstition > 85){    
-        var npc = new unit (1024,505,Math.random() * scientist_speed,24,24,"./content/images/evil_scientist.png",scientist_hp,scientist_damage);
-        add_enemy_unit(npc);
-        superstition = superstition - scientist_cost;
+        add_enemy_unit('evil_scientist');
       }
     } else {        
       if (Math.random() * superstition > 85) {
-      //spawn bat
-        var npc = new unit (1024,505,Math.random() * scientist_speed,24,24,"./content/images/bat.png",scientist_hp,scientist_damage);
-        add_enemy_unit(npc);
-        superstition = superstition - scientist_cost;
+        add_enemy_unit('bat');
       }
     }
   }
   
 
   if (turn_count % 35 == 0  && active_npcs_count < 40){
-    //spawn werewolf 
+
     if (Math.random() * superstition > 90){
-      var npc = new unit (1024,505,Math.random() * werewolf_speed,48,48,"./content/images/werewolf.png",werewolf_hp,werewolf_damage);
-      add_enemy_unit(npc);
-      superstition = superstition - werewolf_cost;
+      add_enemy_unit('werewolf');
     } else if (Math.random() * superstition > 85) {
-      var npc = new unit (1024,505,Math.random() * werewolf_speed,48,48,"./content/images/vampire.png",werewolf_hp,werewolf_damage);
-      add_enemy_unit(npc);
-      superstition = superstition - werewolf_cost;
+      add_enemy_unit('vampire');
     }
   }
   if (turn_count % 50 == 0 && active_npcs_count < 52){
-    //spawn giant trooper
     if (Math.random() * superstition > 150){
-      var npc = new unit (1024,505,giant_trooper_speed,96,48,"./content/images/evil_giant_robot.png",giant_trooper_hp,giant_trooper_damage);
-      add_enemy_unit(npc);
-      superstition = superstition - giant_trooper_cost;        
+      add_enemy_unit('evil_giant_robot');
     }
   }
 
   if (turn_count % 40 == 0 && active_npcs_count < 50){
-    //spawn evil pylon
     if (Math.random() * superstition > 80 ){
-      var npc = new unit (1024,505,pylon_speed,24,24,"./content/images/pylon.png",pylon_hp,pylon_damage);
-      add_enemy_unit(npc);
-      superstition = superstition - pylon_cost;        
+      add_enemy_unit('evil_pylon');
     }
   }
 
 if (turn_count % 10 == 0  ){
-    //spawn evil grogon
     if (Math.random() * superstition > 999){
-      var npc = new unit (1024,505,grogon_speed,256,256,"./content/images/evil_grogon.png",grogon_hp,grogon_damage);
-      add_enemy_unit(npc);
-      superstition = superstition - grogon_cost;        
+      add_enemy_unit('grogon');
     }
   }
 
 if (turn_count % 60 == 0 && npcs_count < 10000){
-    //spawn evil beast
+  var beast_meta = CHR['beast'];
   if (Math.random() > .5){
-    if (Math.random() * superstition > beast_cost - 1  && active_npcs_count < 57){   
-      var npc = new unit (1024,505,beast_speed,48,48,"./content/images/beast.png",beast_hp,beast_damage);
-      add_enemy_unit(npc);
-      superstition = superstition - beast_cost;        
+    if (Math.random() * superstition > beast_meta.cost - 1  && active_npcs_count < 57){   
+      add_enemy_unit('beast');
     }
   } else { 
-    if (Math.random() * superstition > beast_cost - 1  && active_npcs_count < 57){   
-      var npc = new unit (1024,505,beast_speed,48,48,"./content/images/mole.png",beast_hp,beast_damage);
-      add_enemy_unit(npc);
-      superstition = superstition - beast_cost;        
+    if (Math.random() * superstition > beast_meta.cost - 1  && active_npcs_count < 57){   
+      add_enemy_unit('mole');
     }
   }
   }
@@ -165,9 +84,7 @@ if (turn_count % 60 == 0 && npcs_count < 10000){
 if (turn_count % 100 == 0 && npcs_count < 10000){
     // spawn enemy rocket
     if (Math.random()  > .75){
-      var npc = new unit (1024,505,rocket_speed,24,24,"./content/images/rocket.png",rocket_hp,rocket_damage);
-      add_enemy_unit(npc);
-      superstition = superstition - rocket_cost;        
+      add_enemy_unit('evil_rocket');
     }
   }
 
@@ -176,8 +93,6 @@ if (turn_count % 100 == 0 && npcs_count < 10000){
 }
 
 unit_movement = function() {
-
-//unit movement
 
   for (var i in npcs) {
     if (i != 0){
@@ -201,6 +116,11 @@ function melee_combat_detection() {
 //melee combat detection
   for (var i in npcs) {
     for (var j in chars) {
+
+      if (!npcs[i] || !chars[j]) {
+        continue; // avoid deleted elements
+      }
+
       if (Math.abs(chars[j].x - npcs[i].x) < 50 && Math.abs(chars[j].y - npcs[i].y) < 50)  {                
         //npc deals melee damage to character
 
@@ -244,7 +164,6 @@ function melee_combat_detection() {
 }
 
 game_base.draw = function() {
-        
   //clear the canvas and the buffer for the next frame
   _canvasContext.clearRect(0,0,_canvas.width,_canvas.height);
   _canvasBufferContext.clearRect(0,0,_canvas.width,_canvas.height);
@@ -314,7 +233,6 @@ game_base.draw = function() {
   }
  
 
-  //if (turn_count % 30 == 0) {
   for (var k in collisions) {
     if (collisions[k].display_time > 0) {
       _canvasBufferContext.strokeStyle = 'rgba(200, 0, 0, 0.25)';
@@ -333,18 +251,32 @@ game_base.draw = function() {
   _canvasContext.drawImage(_canvasBuffer, 0 , 0);	
 }
 
+add_unit = function (char_name) {
 
-game_base._intervalID = setInterval(game_base.run, 1000 / game_base.fps);
-
-add_unit = function (char){
-    chars[chars_count] = char;
-    chars_count++;
-    player_cooldown = 0;
-    active_chars_count++;
+  var char = new unit(char_name);
+  if (science < char.cost) {
+    return 0;
+  }
+  chars[chars_count] = char;
+  chars_count++;
+  player_cooldown = 0;
+  active_chars_count++;
+  science = science - char.cost;
+  return 1;
 }
 
-add_enemy_unit = function(npc){
-    npcs[npcs_count] = npc;
-    npcs_count++;
-    active_npcs_count++;
+add_enemy_unit = function(npc_name){
+
+  var npc = new unit(npc_name);
+  if (superstition < npc.cost) {
+    return 0;
+  }
+
+  npcs[npcs_count] = npc;
+  npcs_count++;
+  active_npcs_count++;
+  superstition = superstition - npc.cost;        
+  return npc;
 }    
+
+
