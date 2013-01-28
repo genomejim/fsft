@@ -3,7 +3,25 @@ game_base.run = function () {
     game_base.draw();
 }
 
+game_base.update = function(event) {
 
+  player_unit_spawning(event);
+  enemy_unit_spawning();
+  unit_movement();
+  melee_combat_detection();
+}
+
+player_unit_spawning() = function(event) {
+/*
+  if (pressed_right && player_cooldown > scientist_cooldown && science > scientist_cost -1){
+    var char = new unit (50,505,scientist_speed,24,24,"./content/images/scientist.png",scientist_hp,scientist_damage);
+    add_unit(char);     
+    science = science - scientist_cost;
+  }
+*/
+}
+
+/*
 game_base.update = function(event) {
 
 //player unit spawning
@@ -60,6 +78,10 @@ if (pressed_space && player_cooldown > rocket_cooldown && science > rocket_cost 
     science = science - rocket_cost;
   }
 
+
+} */
+
+enemy_unit_spawning = function() {
 
 //enemy unit spawning
 
@@ -151,6 +173,10 @@ if (turn_count % 100 == 0 && npcs_count < 10000){
 
 }
 
+}
+
+unit_movement = function() {
+
 //unit movement
 
   for (var i in npcs) {
@@ -167,6 +193,10 @@ if (turn_count % 100 == 0 && npcs_count < 10000){
       
     }
   }  
+
+}
+
+function melee_combat_detection() {
 
 //melee combat detection
   for (var i in npcs) {

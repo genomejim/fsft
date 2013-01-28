@@ -103,3 +103,24 @@ _canvasBuffer.height = _canvas.height;
     _canvasBufferContext.font         = 'bold 15px sans-serif';
     _canvasBufferContext.textBaseline = 'top';
 }
+
+KEY_NAME = initial_key_mapping();
+KEYPRESSED = '';
+
+function initial_key_mapping() {
+return {
+  32: 'SPACE',
+  37: 'LEFT',
+  38: 'UP',
+  39: 'RIGHT',
+  43: 'DOWN',
+  65: 'LEFT',
+  68: 'RIGHT',
+  69: 'e',
+  70: 'SPACE',
+  81: 'q',
+  83: 'DOWN',
+  87: 'UP',
+};
+}
+
