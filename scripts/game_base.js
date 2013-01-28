@@ -178,7 +178,7 @@ game_base.draw = function() {
         _canvasBufferContext.fillRect(0, 670 , 1097, 25); 
         _canvasBufferContext.fillStyle    = 'rgba(1000, 1000, 1000, 0.9)';
         _canvasBufferContext.fillText('score = ', 10, 5);
-	_canvasBufferContext.fillText(score + lab.hp, 70, 5);        
+	_canvasBufferContext.fillText(score + chars[0].hp, 70, 5);        
         _canvasBufferContext.fillText('science = ', 200, 5);
         _canvasBufferContext.fillText(science, 270, 5);
         _canvasBufferContext.fillText('lab = ', 400, 5);
