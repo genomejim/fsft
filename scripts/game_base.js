@@ -47,7 +47,7 @@ game_base.update = function(event) {
 
 //spawn grogon
   if (pressed_e && player_cooldown > grogon_cooldown && science > grogon_cost -1){
-    var char = new unit (50,505,grogon_speed,256,256,"./content/images/grogon.png",grogon_hp,grogon_damage);
+    var char = new unit (50,505,grogon_speed,96,126,"./content/images/grogon.png",grogon_hp,grogon_damage);
     add_unit(char);
     science = science - grogon_cost;
     grogon_text=500;    
