@@ -40,11 +40,11 @@ var get_characters = function() {
     "melee_damage": 3,
     "height": 96,
     "hp": 500,
-    "image": "scientist_base.png",
+    "image": "lab.png",
     "spawn_keys": [],
     "speed": 0,
     "width": 96,
-    "x": 25,
+    "x": 55,
     "y": 505,
   };
 
