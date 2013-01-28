@@ -13,7 +13,17 @@ game_base.update = function(event) {
   melee_combat_detection();
 }
 
+<<<<<<< HEAD
+//spawn grogon
+  if (pressed_e && player_cooldown > grogon_cooldown && science > grogon_cost -1){
+    var char = new unit (50,505,grogon_speed,96,126,"./content/images/grogon.png",grogon_hp,grogon_damage);
+    add_unit(char);
+    science = science - grogon_cost;
+    grogon_text=500;    
+  }
+=======
 player_unit_spawning = function(event) {
+>>>>>>> jtal
 
   if (KEYPRESSED != '') {
     for (var i in SPAWN[KEYPRESSED]) {
