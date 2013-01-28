@@ -54,7 +54,7 @@ var get_characters = function() {
     "melee_damage": 3,
     "height": 96,
     "hp": 10000,
-    "image": "scientist_base.png",
+    "image": "lair.png",
     "spawn_keys": [],
     "speed": 0,
     "width": 96,
