@@ -274,6 +274,7 @@ add_enemy_unit = function(npc_name){
   }
 
   npcs[npcs_count] = npc;
+  npcs[npcs_count].speed = Math.random() * npcs[npcs_count].speed
   npcs_count++;
   active_npcs_count++;
   superstition = superstition - npc.cost;        
