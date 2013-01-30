@@ -60,12 +60,12 @@ SPAWN = get_key_codes(CHR);
 // create units that start in play
 // unit params (x,y,speed,height,width,image_src,hp,melee_damage)
 
-/*
+
   var lab = new unit("lab");
   chars[chars_count] = lab;
   chars_count++;
-*/
-  var lab = add_unit('lab');
+
+  //var lab = add_unit('lab');
   var lair = new unit("lair");
   npcs[npcs_count] = lair;
   npcs_count++;

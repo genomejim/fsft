@@ -256,6 +256,9 @@ add_unit = function (char_name) {
   if (science < char.cost || player_cooldown < char.cooldown) {
     return 0;
   }
+  if (active_chars_count >= 50 && char_name == "pylon") {
+    return 0;
+  }
   chars[chars_count] = char;
   chars_count++;
   player_cooldown = 0;
