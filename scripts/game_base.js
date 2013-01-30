@@ -1,5 +1,3 @@
-
-
 game_base.run = function () {
     game_base.update();
     game_base.draw();
@@ -28,7 +26,7 @@ player_unit_spawning = function(event) {
 enemy_unit_spawning = function() {
 
 if (lair.hp > 0) {
-  if (turn_count % 30 == 0 && active_npcs_count < 20){
+  if (active_npcs_count < 20){
 
     if (Math.random() > .5){
       if (Math.random() * superstition > 85){    
@@ -178,16 +176,16 @@ game_base.draw = function() {
         _canvasBufferContext.fillRect(0, 670 , 1097, 25); 
         _canvasBufferContext.fillStyle    = 'rgba(1000, 1000, 1000, 0.9)';
         _canvasBufferContext.fillText('score = ', 10, 5);
-	_canvasBufferContext.fillText(score + chars[0].hp, 70, 5);        
+	_canvasBufferContext.fillText(score, 70, 5);        
         _canvasBufferContext.fillText('science = ', 200, 5);
         _canvasBufferContext.fillText(science, 270, 5);
         _canvasBufferContext.fillText('lab = ', 400, 5);
-	_canvasBufferContext.fillText(lab.hp, 470, 5);
+	_canvasBufferContext.fillText(chars[0].hp, 470, 5);
         _canvasBufferContext.fillText('lair = ', 600, 5);
 	_canvasBufferContext.fillText(lair.hp, 670, 5);
         _canvasBufferContext.fillText('superstition = ', 770, 5);
 	_canvasBufferContext.fillText(superstition, 880, 5);
-        _canvasBufferContext.fillText('v 0.2.0', 960, 5);
+        _canvasBufferContext.fillText('v 0.3.0', 960, 5);
         _canvasBufferContext.fillStyle    = 'rgba(100, 100, 100, 0.5)';
         _canvasBufferContext.fillText("w = flying scientist 7", 10, 25);
         _canvasBufferContext.fillText("a = giant trooper 100",10, 40);
@@ -255,7 +253,7 @@ game_base.draw = function() {
 add_unit = function (char_name) {
 
   var char = new unit(char_name);
-  if (science < char.cost) {
+  if (science < char.cost || player_cooldown < char.cooldown) {
     return 0;
   }
   chars[chars_count] = char;

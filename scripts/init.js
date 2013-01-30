@@ -4,7 +4,7 @@
   var collisions = new Object;
 
 // clocks and counts
-  var score = 1000;
+  var score = 1500;
   var science = 100;
   var superstition = 100;
   var chars_count = 0;
