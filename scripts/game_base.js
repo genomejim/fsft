@@ -168,7 +168,7 @@ game_base.draw = function() {
   _canvasBufferContext.clearRect(0,0,_canvas.width,_canvas.height);
 
   //draw background image       
-  _canvasBufferContext.drawImage(back, 0, 0);              
+  //_canvasBufferContext.drawImage(back, 0, 0);              
 
 //draw HUD
         _canvasBufferContext.fillStyle = 'rgba(0, 500, 0, 0.5)';

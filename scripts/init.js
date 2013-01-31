@@ -77,6 +77,7 @@ SPAWN = get_key_codes(CHR);
   var _canvas = document.getElementById('game_base');
   var _canvasContext = null;
 
+
 if (_canvas && _canvas.getContext) {
     _canvasContext = _canvas.getContext('2d');
     _canvasBuffer = document.createElement('canvas');

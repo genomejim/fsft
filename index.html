@@ -6,11 +6,72 @@
 <canvas id="game_base" width="1097" height="693">
 canvas not suppoted.
 </canvas>
+<div id="container"></div>
 <script type="text/javascript" src="./scripts/game_base.js"></script>
 <script type="text/javascript" src="./scripts/unit.js"></script>
 <script type="text/javascript" src="./scripts/init.js"></script>
 <script type="text/javascript" src="./scripts/collision.js"></script>
 <script type="text/javascript" src="./scripts/input_handling.js"></script>
+
+
+<script src="http://www.html5canvastutorials.com/libraries/kinetic-v4.3.0-beta2.js"></script>
+
+<script>
+//Kinect JS stuffs
+  var stage = new Kinetic.Stage({
+        container: 'container',
+        width: 1097,
+        height: 60
+      });
+
+      var button_layer = new Kinetic.Layer();
+      var text_layer = new Kinetic.Layer();
+
+
+  //var group = new Kinetic.Group({
+  //});
+
+  var rect1 = new Kinetic.Rect({
+
+    x: 5,
+    y: 5,
+    width: 80,
+    height: 35,
+    fill: "green",
+    stroke: "black",
+    strokeWidth: 2
+
+  });
+
+  var rect2 = new Kinetic.Rect({
+
+    x: 90,
+    y: 5,
+    width: 80,
+    height: 35,
+    fill: "green",
+    stroke: "black",
+    strokeWidth: 2
+
+  });
+
+
+      // add the shape to the layer
+      button_layer.add(rect1);
+      button_layer.add(rect2);
+            
+
+      // add the layer to the stage
+      stage.add(button_layer);
+      
+
+      rect1.on('click', function() {
+        add_unit('scientist');
+      });
+      rect2.on('click', function() {
+        add_unit('science_trooper');
+      });
+</script>
 
 <script type="text/javascript">
 
