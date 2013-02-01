@@ -1,0 +1,36 @@
+level1 = function(character_name) {
+
+  this.starting_units = {
+    "vampire": 2,
+    "evil_scientist": 3
+  };
+
+  this.spawn.evil_scientist = function(meta) {
+    if (meta.active_npcs_count < 20
+        && Math.random() > .5
+        && Math.random() * meta.superstition > 85)
+      return 1;
+  }
+
+}
+
+
+----------------------------------------
+
+
+level1 = {
+  starting_units: {
+    "vampire": 2,
+    "evil_scientist": 3,
+  },
+  spawn: {
+    "evil_scientist": {
+        min_active_npcs_count: 20,
+        max_active_npcs_count: 30,
+        ...hrmm....
+    }
+  }
+}
+
+
+
