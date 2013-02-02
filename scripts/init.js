@@ -1,3 +1,5 @@
+
+
 // create objects to use as associative arrays 
   var chars = new Object;
   var npcs = new Object;
@@ -16,6 +18,7 @@
   var active_npcs_count = 0;
   var collision_count = 0;
   var grogon_text = 0;
+  var active_level = 1;
 
 KEY_CODES = {
   'SPACE': [32, 70],

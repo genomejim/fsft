@@ -1,3 +1,5 @@
+
+
 game_base.run = function () {
     game_base.update();
     game_base.draw();
@@ -25,71 +27,15 @@ player_unit_spawning = function(event) {
 
 enemy_unit_spawning = function() {
 
-if (lair.hp > 0) {
-  if (active_npcs_count < 20){
-
-    if (Math.random() > .5){
-      if (Math.random() * superstition > 85){    
-        add_enemy_unit('evil_scientist');
-      }
-    } else {        
-      if (Math.random() * superstition > 85) {
-        add_enemy_unit('bat');
-      }
-    }
-  }
-  
-
-  if (turn_count % 35 == 0  && active_npcs_count < 40){
-
-    if (Math.random() * superstition > 90){
-      add_enemy_unit('werewolf');
-    } else if (Math.random() * superstition > 85) {
-      add_enemy_unit('vampire');
-    }
-  }
-  if (turn_count % 50 == 0 && active_npcs_count < 52){
-    if (Math.random() * superstition > 150){
-      add_enemy_unit('evil_giant_robot');
-    }
-  }
-
-  if (turn_count % 40 == 0 && active_npcs_count < 50){
-    if (Math.random() * superstition > 80 ){
-      add_enemy_unit('evil_pylon');
-    }
-  }
-
-if (turn_count % 10 == 0  ){
-    if (Math.random() * superstition > 999){
-      add_enemy_unit('grogon');
-    }
-  }
-
-if (turn_count % 60 == 0 && npcs_count < 10000){
-  var beast_meta = CHR['beast'];
-  if (Math.random() > .5){
-    if (Math.random() * superstition > beast_meta.cost - 1  && active_npcs_count < 57){   
-      add_enemy_unit('beast');
-    }
-  } else { 
-    if (Math.random() * superstition > beast_meta.cost - 1  && active_npcs_count < 57){   
-      add_enemy_unit('mole');
-    }
-  }
-  }
-
-
-if (turn_count % 100 == 0 && npcs_count < 10000){
-    // spawn enemy rocket
-    if (Math.random()  > .75){
-      add_enemy_unit('evil_rocket');
-    }
-  }
+   if (active_level == 1){
+     level1();
+   }
+   else if (active_level == 2) {
+     level2();
+   }
 
 }
 
-}
 
 unit_movement = function() {
 
@@ -135,9 +81,11 @@ function melee_combat_detection() {
         npcs[i].hp = npcs[i].hp - chars[j].melee_damage;
 
         if (npcs[i].hp <= 0) {
-          delete npcs[i];
-          score++;
-          active_npcs_count--;
+          if (i != 0) {
+            delete npcs[i];
+            score++;
+            active_npcs_count--;
+          }
         }
         if (chars[j].hp <= 0) {
           delete chars[j];

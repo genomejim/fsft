@@ -45,7 +45,7 @@ var get_characters = function() {
     "speed": 0,
     "width": 96,
     "x": 55,
-    "y": 505,
+    "y": 500,
   };
 
   characters['lair'] = {
@@ -58,8 +58,8 @@ var get_characters = function() {
     "spawn_keys": [],
     "speed": 0,
     "width": 96,
-    "x": 1000,
-    "y": 505,
+    "x": 900,
+    "y": 475,
   };
 
   characters['scientist'] = {
@@ -73,7 +73,7 @@ var get_characters = function() {
     "speed": 2,
     "width": 24,
     "x": 50,
-    "y": 505,
+    "y": 475,
   };
 
   characters['flying_scientist'] = {
@@ -87,7 +87,7 @@ var get_characters = function() {
     "speed": 4,
     "width": 24,
     "x": 50,
-    "y": 505,
+    "y": 475,
   };
 
   characters['science_trooper'] = {
@@ -101,7 +101,7 @@ var get_characters = function() {
     "speed": 1,
     "width": 48,
     "x": 50,
-    "y": 505,
+    "y": 475,
   };
 
   characters['giant_trooper'] = {
@@ -115,7 +115,7 @@ var get_characters = function() {
     "speed": 0.2,
     "width": 96,
     "x": 50,
-    "y": 505,
+    "y": 475,
   };
 
   characters['pylon'] = {
@@ -129,7 +129,7 @@ var get_characters = function() {
     "speed": 0,
     "width": 24,
     "x": 50,
-    "y": 505,
+    "y": 475,
   };
 
   characters['grogon'] = {
@@ -143,7 +143,7 @@ var get_characters = function() {
     "speed": 2,
     "width": 96,
     "x": 50,
-    "y": 505,
+    "y": 475,
   };
 
   characters['rocket'] = {
@@ -157,7 +157,7 @@ var get_characters = function() {
     "speed": 15,
     "width": 24,
     "x": 50,
-    "y": 505,
+    "y": 475,
   };
  
   characters['evil_scientist'] = {
@@ -170,8 +170,8 @@ var get_characters = function() {
     "spawn_keys": [],
     "speed": 2,
     "width": 24,
-    "x": 1024,
-    "y": 505,
+    "x": 924,
+    "y": 475,
   };
 
   characters['bat'] = {
@@ -184,8 +184,8 @@ var get_characters = function() {
     "spawn_keys": [],
     "speed": 2,
     "width": 24,
-    "x": 1024,
-    "y": 505,
+    "x": 924,
+    "y": 475,
   };
 
   characters['werewolf'] = {
@@ -198,8 +198,8 @@ var get_characters = function() {
     "spawn_keys": [],
     "speed": 1,
     "width": 48,
-    "x": 1024,
-    "y": 505,
+    "x": 924,
+    "y": 475,
   };
 
   characters['vampire'] = {
@@ -212,8 +212,8 @@ var get_characters = function() {
     "spawn_keys": [],
     "speed": 1,
     "width": 48,
-    "x": 1024,
-    "y": 505,
+    "x": 924,
+    "y": 475,
   };
 
   characters['evil_giant_robot'] = {
@@ -226,8 +226,8 @@ var get_characters = function() {
     "spawn_keys": [],
     "speed": 0.2,
     "width": 48,
-    "x": 1024,
-    "y": 505,
+    "x": 924,
+    "y": 475,
   };
 
   characters['evil_pylon'] = {
@@ -240,8 +240,8 @@ var get_characters = function() {
     "spawn_keys": [],
     "speed": 0,
     "width": 24,
-    "x": 1024,
-    "y": 505,
+    "x": 924,
+    "y": 475,
   };
 
   characters['beast'] = {
@@ -254,8 +254,8 @@ var get_characters = function() {
     "spawn_keys": [],
     "speed": 5,
     "width": 48,
-    "x": 1024,
-    "y": 505,
+    "x": 924,
+    "y": 475,
   };
 
   characters['mole'] = {
@@ -268,8 +268,8 @@ var get_characters = function() {
     "spawn_keys": [],
     "speed": 5,
     "width": 48,
-    "x": 1024,
-    "y": 505,
+    "x": 924,
+    "y": 475,
   };
 
   characters['evil_rocket'] = {
@@ -282,8 +282,8 @@ var get_characters = function() {
     "spawn_keys": ['space'],
     "speed": 15,
     "width": 24,
-    "x": 1024,
-    "y": 505,
+    "x": 924,
+    "y": 475,
   };
  
 
