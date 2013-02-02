@@ -272,6 +272,20 @@ var get_characters = function() {
     "y": 475,
   };
 
+  characters['evil_grogon'] = {
+    "cooldown": 100,
+    "cost": 1000,
+    "melee_damage": 25,
+    "height": 222,
+    "hp": 700,
+    "image": "evil_grogon.png",
+    "spawn_keys": [],
+    "speed": 5,
+    "width": 256,
+    "x": 924,
+    "y": 475,
+  };
+
   characters['evil_rocket'] = {
     "cooldown": 1,
     "cost": 5,

@@ -197,7 +197,7 @@ if (lair.hp > 0) {
 
 if (turn_count % 10 == 0  ){
     if (Math.random() * superstition > 999){
-      add_enemy_unit('grogon');
+      add_enemy_unit('evil_grogon');
     }
   }
 
@@ -283,7 +283,7 @@ if (lair.hp > 0) {
 
 if (turn_count % 10 == 0  ){
     if (Math.random() * superstition > 500){
-      add_enemy_unit('grogon');
+      add_enemy_unit('evil_grogon');
     }
   }
 
