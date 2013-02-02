@@ -22,11 +22,11 @@ if (turn_count % 100 == 0 && npcs_count < 10000){
   }
 
 } else {
-    //lair = new unit("lair");
-    //npcs[npcs_count] = lair;
+
     lair.hp=10000;
     superstition = 100;
     active_level++; 
+    window.alert("Starting Level 2");
     //init();
 }
 
