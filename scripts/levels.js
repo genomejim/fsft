@@ -20,6 +20,8 @@ if (lair.hp > 0) {
     //level transition
     lair.hp=10000;
     superstition = 100;
+    turn_count = 0;
+    active_chars_count = 0;
     active_level++; 
     for (var i in chars) {
       if (i != 0) {
@@ -37,11 +39,11 @@ if (lair.hp > 0) {
 
 }
 function level2(){
-
+level_display_name = "For Love and Rockets!";
 if (lair.hp > 0) {
 
   
-if (npcs_count < 10000){
+if (npcs_count < 10000  && turn_count > 1000){
     // spawn enemy rocket
     if (Math.random()  > .9){
       add_enemy_unit('evil_rocket');
@@ -50,9 +52,22 @@ if (npcs_count < 10000){
 
 } else {
 
+    //level transition
     lair.hp=10000;
     superstition = 100;
+    turn_count = 0;
+    active_chars_count = 0;
     active_level++; 
+    for (var i in chars) {
+      if (i != 0) {
+        delete chars[i];
+      }
+    }
+    for (var j in npcs) {
+      if (j != 0) {
+        delete npcs[j];
+      }
+    }
     window.alert("Starting Level 3");
     //init();
 }
@@ -60,7 +75,7 @@ if (npcs_count < 10000){
 }
 
 function level3(){
-
+level_display_name = "SRSLY!";
 if (lair.hp > 0) {
   if (active_npcs_count < 20){
 
@@ -122,16 +137,29 @@ if (turn_count % 100 == 0 && npcs_count < 10000){
   }
 
 } else { 
+    //level transition
     lair.hp=10000;
     superstition = 100;
+    turn_count = 0;
+    active_chars_count = 0;
     active_level++; 
+    for (var i in chars) {
+      if (i != 0) {
+        delete chars[i];
+      }
+    }
+    for (var j in npcs) {
+      if (j != 0) {
+        delete npcs[j];
+      }
+    }
     window.alert("Starting Level 4");
 }
 
 }
 
 function level4(){
-
+level_display_name = "Give us a sampling of your power!";
 if (lair.hp > 0) {
   if (active_npcs_count < 30){
 
@@ -195,9 +223,22 @@ if (turn_count % 100 == 0 && npcs_count < 10000){
 }
 
 else { 
+    //level transition
     lair.hp=10000;
     superstition = 100;
+    turn_count = 0;
+    active_chars_count = 0;
     active_level++; 
+    for (var i in chars) {
+      if (i != 0) {
+        delete chars[i];
+      }
+    }
+    for (var j in npcs) {
+      if (j != 0) {
+        delete npcs[j];
+      }
+    }
     window.alert("Starting Level 5");
 }
 
@@ -268,9 +309,22 @@ if (turn_count % 100 == 0 && npcs_count < 10000){
 }
 
 else { 
+    //level transition
     lair.hp=10000;
     superstition = 100;
+    turn_count = 0;
+    active_chars_count = 0;
     active_level++; 
+    for (var i in chars) {
+      if (i != 0) {
+        delete chars[i];
+      }
+    }
+    for (var j in npcs) {
+      if (j != 0) {
+        delete npcs[j];
+      }
+    }
     window.alert("You Win! Science Prevails!");
 }
 

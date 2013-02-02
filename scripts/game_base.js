@@ -155,6 +155,8 @@ game_base.draw = function() {
 	_canvasBufferContext.fillText(active_chars_count, 140, 520);
         _canvasBufferContext.fillText('Level', 400, 520);
 	_canvasBufferContext.fillText(active_level, 450, 520);
+	_canvasBufferContext.fillText(level_display_name, 475, 520);
+
         _canvasBufferContext.fillText('Agents of Superstition = ', 800, 520);
 	_canvasBufferContext.fillText(active_npcs_count, 1000, 520);
 
