@@ -45,7 +45,7 @@ var get_characters = function() {
     "speed": 0,
     "width": 96,
     "x": 55,
-    "y": 500,
+    "y": 450,
   };
 
   characters['lair'] = {
@@ -59,7 +59,7 @@ var get_characters = function() {
     "speed": 0,
     "width": 96,
     "x": 900,
-    "y": 475,
+    "y": 450,
   };
 
   characters['scientist'] = {

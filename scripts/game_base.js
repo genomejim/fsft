@@ -33,7 +33,15 @@ enemy_unit_spawning = function() {
    else if (active_level == 2) {
      level2();
    }
-
+   else if (active_level == 3) {
+     level3();
+   }
+   else if (active_level == 4) {
+     level4();
+   }
+   else if (active_level == 5) {
+     level5();
+   }
 }
 
 
@@ -121,7 +129,7 @@ game_base.draw = function() {
 //draw HUD
         _canvasBufferContext.fillStyle = 'rgba(0, 500, 0, 0.5)';
         _canvasBufferContext.fillRect(0, 0 , 1097, 25);
-        _canvasBufferContext.fillRect(0, 670 , 1097, 25); 
+        _canvasBufferContext.fillRect(0, 513 , 1097, 25); 
         _canvasBufferContext.fillStyle    = 'rgba(1000, 1000, 1000, 0.9)';
         _canvasBufferContext.fillText('score = ', 10, 5);
 	_canvasBufferContext.fillText(score, 70, 5);        
@@ -133,7 +141,7 @@ game_base.draw = function() {
 	_canvasBufferContext.fillText(lair.hp, 670, 5);
         _canvasBufferContext.fillText('superstition = ', 770, 5);
 	_canvasBufferContext.fillText(superstition, 880, 5);
-        _canvasBufferContext.fillText('v 0.3.0', 960, 5);
+        _canvasBufferContext.fillText('v 0.3.2', 960, 5);
         _canvasBufferContext.fillStyle    = 'rgba(100, 100, 100, 0.5)';
         _canvasBufferContext.fillText("w = flying scientist 7", 10, 25);
         _canvasBufferContext.fillText("a = giant trooper 100",10, 40);
@@ -143,10 +151,12 @@ game_base.draw = function() {
         _canvasBufferContext.fillText("e = grogon 1000", 10, 100);
         _canvasBufferContext.fillText("space = rocket 5", 10, 115);
         _canvasBufferContext.fillStyle    = 'rgba(1000, 1000, 1000, 0.9)';
-        _canvasBufferContext.fillText('Science Force = ', 10, 675);
-	_canvasBufferContext.fillText(active_chars_count, 140, 675);
-        _canvasBufferContext.fillText('Agents of Superstition = ', 850, 675);
-	_canvasBufferContext.fillText(active_npcs_count, 1040, 675);
+        _canvasBufferContext.fillText('Science Force = ', 10, 520);
+	_canvasBufferContext.fillText(active_chars_count, 140, 520);
+        _canvasBufferContext.fillText('Level', 400, 520);
+	_canvasBufferContext.fillText(active_level, 450, 520);
+        _canvasBufferContext.fillText('Agents of Superstition = ', 800, 520);
+	_canvasBufferContext.fillText(active_npcs_count, 1000, 520);
 
   if (lair.hp <= 0) {
     _canvasBufferContext.fillStyle = 'rgba(0, 500, 0, 0.5)';
