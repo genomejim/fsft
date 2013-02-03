@@ -163,6 +163,7 @@ game_base.draw = function() {
         _canvasBufferContext.fillText("e = grogon 1000", 10, 100);
         _canvasBufferContext.fillText("space = rocket 5", 10, 115);
         _canvasBufferContext.fillText("z = ghost 300", 10, 130);
+        _canvasBufferContext.fillText("p = pause", 10, 145);
         _canvasBufferContext.fillStyle    = 'rgba(1000, 1000, 1000, 0.9)';
         _canvasBufferContext.fillText('Science Force = ', 10, 520);
 	_canvasBufferContext.fillText(active_chars_count, 140, 520);
