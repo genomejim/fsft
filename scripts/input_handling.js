@@ -147,6 +147,26 @@ function down(event) {
         fill: 'white'
   });
 
+  var rect7 = new Kinetic.Rect({
+
+    x: 640,
+    y: 5,
+    width: 80,
+    height: 35,
+    fill: "green",
+    stroke: "black",
+    strokeWidth: 2
+
+  });
+  var text7 = new Kinetic.Text({
+        x: 650,
+        y: 15,
+        text: 'ghost (z)',
+        fontSize: 15,
+        fontFamily: 'Calibri',
+        fill: 'white'
+  });
+
       // add the shape to the layer
       button_layer.add(rect1);
       button_layer.add(text1);
@@ -160,6 +180,8 @@ function down(event) {
       button_layer.add(text5);
       button_layer.add(rect6);
       button_layer.add(text6);
+      button_layer.add(rect7);
+      button_layer.add(text7);
             
 
       // add the layer to the stage
@@ -184,6 +206,9 @@ function down(event) {
       rect6.on('mousedown click tap', function() {
         add_unit('rocket');
       });
+      rect7.on('mousedown click tap', function() {
+        add_unit('ghost');
+      });
       text1.on('mousedown click tap', function() {
         add_unit('scientist');
       });
@@ -201,4 +226,7 @@ function down(event) {
       });
       text6.on('mousedown click tap', function() {
         add_unit('rocket');
+      });
+      text7.on('mousedown click tap', function() {
+        add_unit('ghost');
       });

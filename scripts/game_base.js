@@ -17,6 +17,9 @@ game_base.update = function(event) {
 player_unit_spawning = function(event) {
 
   if (KEYPRESSED != '') {
+    if (KEYPRESSED == 80) {
+	window.alert("Ken, it's paused!");
+    }
     for (var i in SPAWN[KEYPRESSED]) {
       var character_name = SPAWN[KEYPRESSED][i];
       add_unit(character_name);
@@ -46,6 +49,7 @@ enemy_unit_spawning = function() {
 
 
 unit_movement = function() {
+
 
   for (var i in npcs) {
     if (i != 0){
@@ -90,7 +94,7 @@ function melee_combat_detection() {
         //attack enemy speed and damage
           npcs[i].speed = 0;
           if ( i != 0) {
-            npcs[i].melee_damage = npcs[i].melee_damage - 10;
+            npcs[i].melee_damage = npcs[i].melee_damage - 7;
           }
 	}
         else {

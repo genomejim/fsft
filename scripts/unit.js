@@ -112,7 +112,7 @@ var get_characters = function() {
     "hp": 1250,
     "image": "giant_trooper.png",
     "spawn_keys": ['LEFT'],
-    "speed": 0.2,
+    "speed": 0.4,
     "width": 96,
     "x": 50,
     "y": 475,
