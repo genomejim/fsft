@@ -224,7 +224,7 @@ var get_characters = function() {
     "hp": 1250,
     "image": "evil_giant_robot.png",
     "spawn_keys": [],
-    "speed": 0.2,
+    "speed": 0.5,
     "width": 48,
     "x": 924,
     "y": 475,
@@ -299,7 +299,21 @@ var get_characters = function() {
     "x": 924,
     "y": 475,
   };
- 
+
+  characters['ghost'] = {
+    "cooldown": 1,
+    "cost": 300,
+    "melee_damage": 0,
+    "height": 24,
+    "hp": 100,
+    "image": "ghost.png",
+    "spawn_keys": ['z'],
+    "speed": 15,
+    "width": 24,
+    "x": 50,
+    "y": 475,
+    "name" : 'ghost',
+  };
 
   return characters;
 }

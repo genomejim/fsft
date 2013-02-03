@@ -86,8 +86,16 @@ function melee_combat_detection() {
         chars[j].hp = chars[j].hp - npcs[i].melee_damage;
                 
         //character deals melee damage to npc
+        if (chars[j].name == 'ghost'){
+        //attack enemy speed and damage
+          npcs[i].speed = 0;
+          if ( i != 0) {
+            npcs[i].melee_damage = npcs[i].melee_damage - 10;
+          }
+	}
+        else {
         npcs[i].hp = npcs[i].hp - chars[j].melee_damage;
-
+        }
         if (npcs[i].hp <= 0) {
           if (i != 0) {
             delete npcs[i];
@@ -150,6 +158,7 @@ game_base.draw = function() {
         _canvasBufferContext.fillText("q = pylon 7", 10, 85);
         _canvasBufferContext.fillText("e = grogon 1000", 10, 100);
         _canvasBufferContext.fillText("space = rocket 5", 10, 115);
+        _canvasBufferContext.fillText("z = ghost 300", 10, 130);
         _canvasBufferContext.fillStyle    = 'rgba(1000, 1000, 1000, 0.9)';
         _canvasBufferContext.fillText('Science Force = ', 10, 520);
 	_canvasBufferContext.fillText(active_chars_count, 140, 520);

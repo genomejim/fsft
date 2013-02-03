@@ -36,9 +36,9 @@ function down(event) {
 
   });
   var text1 = new Kinetic.Text({
-        x: 110,
+        x: 105,
         y: 15,
-        text: 'scientist',
+        text: 'scientist (d)',
         fontSize: 15,
         fontFamily: 'Calibri',
         fill: 'white'
@@ -58,7 +58,7 @@ function down(event) {
   var text2 = new Kinetic.Text({
         x: 200,
         y: 15,
-        text: 'trooper',
+        text: 'trooper (s)',
         fontSize: 15,
         fontFamily: 'Calibri',
         fill: 'white'
@@ -79,7 +79,7 @@ function down(event) {
   var text3 = new Kinetic.Text({
         x: 290,
         y: 15,
-        text: 'pylon',
+        text: 'pylon (q)',
         fontSize: 15,
         fontFamily: 'Calibri',
         fill: 'white'
@@ -98,9 +98,9 @@ function down(event) {
   });
 
   var text4 = new Kinetic.Text({
-        x: 380,
+        x: 372,
         y: 15,
-        text: 'giant trpr',
+        text: 'giant trpr (a)',
         fontSize: 15,
         fontFamily: 'Calibri',
         fill: 'white'
@@ -121,7 +121,7 @@ function down(event) {
   var text5 = new Kinetic.Text({
         x: 470,
         y: 15,
-        text: 'grogon',
+        text: 'grogon (e)',
         fontSize: 15,
         fontFamily: 'Calibri',
         fill: 'white'
@@ -139,9 +139,9 @@ function down(event) {
 
   });
   var text6 = new Kinetic.Text({
-        x: 560,
+        x: 555,
         y: 15,
-        text: 'rocket',
+        text: 'rocket (spc)',
         fontSize: 15,
         fontFamily: 'Calibri',
         fill: 'white'
