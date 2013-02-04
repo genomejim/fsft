@@ -53,16 +53,22 @@ unit_movement = function() {
 
   for (var i in npcs) {
     if (i != 0){
-      npcs[i].x = npcs[i].x - npcs[i].speed - Math.random() + Math.random();
+      npcs[i].x = npcs[i].x - npcs[i].xspeed - Math.random() + Math.random();
       npcs[i].y = npcs[i].y - Math.random() + Math.random();
    
     }
   }
   for (var j in chars) {
     if (j != 0){
-      chars[j].x = chars[j].x + chars[j].speed - Math.random() + Math.random();
-      chars[j].y = chars[j].y - Math.random() + Math.random();
+      if (chars[j].name == 'icbm') {
+         chars[j].x = chars[j].x + chars[j].xspeed;
+         chars[j].y = chars[j].y + chars[j].yspeed;
+         chars[j].yspeed = chars[j].yspeed + .1;
       
+      } else {
+        chars[j].x = chars[j].x + chars[j].xspeed - Math.random() + Math.random();
+        chars[j].y = chars[j].y - Math.random() + Math.random();
+      }
     }
   }  
 
@@ -167,7 +173,8 @@ game_base.draw = function() {
         _canvasBufferContext.fillText("e = grogon 1000", 10, 100);
         _canvasBufferContext.fillText("space = rocket 5", 10, 115);
         _canvasBufferContext.fillText("z = ghost 300", 10, 130);
-        _canvasBufferContext.fillText("p = pause", 10, 145);
+        _canvasBufferContext.fillText("z = icbm 200", 10, 145);
+        _canvasBufferContext.fillText("p = pause", 10, 160);
         _canvasBufferContext.fillStyle    = 'rgba(1000, 1000, 1000, 0.9)';
         _canvasBufferContext.fillText('Science Force = ', 10, 520);
 	_canvasBufferContext.fillText(active_chars_count, 140, 520);
