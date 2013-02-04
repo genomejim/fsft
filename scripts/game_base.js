@@ -95,14 +95,15 @@ function melee_combat_detection() {
         
         if (npcs[i].name == 'repulsor'){
           //attack player speed
-          chars[j].speed = ( -Math.random() * 0.1 );
+          chars[j].xspeed = ( -Math.random() * 0.1 );
+          chars[j].yspeed = ( -Math.random() * 0.1 );
         } else {
           chars[j].hp = chars[j].hp - npcs[i].melee_damage;
         }        
         //character deals melee damage to npc
         if (chars[j].name == 'ghost'){
         //attack enemy speed and damage
-          npcs[i].speed = 0;
+          npcs[i].xspeed = 0;
           if ( i != 0) {
             npcs[i].melee_damage = npcs[i].melee_damage - 7;
           }
@@ -173,7 +174,7 @@ game_base.draw = function() {
         _canvasBufferContext.fillText("e = grogon 1000", 10, 100);
         _canvasBufferContext.fillText("space = rocket 5", 10, 115);
         _canvasBufferContext.fillText("z = ghost 300", 10, 130);
-        _canvasBufferContext.fillText("z = icbm 200", 10, 145);
+        _canvasBufferContext.fillText("r = icbm 200", 10, 145);
         _canvasBufferContext.fillText("p = pause", 10, 160);
         _canvasBufferContext.fillStyle    = 'rgba(1000, 1000, 1000, 0.9)';
         _canvasBufferContext.fillText('Science Force = ', 10, 520);
@@ -260,7 +261,7 @@ add_enemy_unit = function(npc_name){
   }
 
   npcs[npcs_count] = npc;
-  npcs[npcs_count].speed = Math.random() * npcs[npcs_count].speed
+  npcs[npcs_count].xspeed = Math.random() * npcs[npcs_count].xspeed
   npcs_count++;
   active_npcs_count++;
   superstition = superstition - npc.cost;        

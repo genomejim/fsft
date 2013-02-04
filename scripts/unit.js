@@ -358,7 +358,7 @@ var get_characters = function() {
     "cost": 200,
     "melee_damage": 100,
     "height": 24,
-    "hp": 15,
+    "hp": 25,
     "image": "icbm.png",
     "spawn_keys": ['r'],
     "yspeed": -5,
