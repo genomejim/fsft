@@ -29,8 +29,8 @@ unit = function(character_name) {
 
 
 var get_characters = function() {
-// CHR is a character hash with key of character name nad value a hash of attributes
-// it is defined in characters.jsonp
+// CHR is a character hash with key of character name and value a hash of attributes
+// it is defined in (??characters.jsonp??)?
 
   var characters = new Object();
 
@@ -313,6 +313,21 @@ var get_characters = function() {
     "x": 50,
     "y": 475,
     "name" : 'ghost',
+  };
+
+  characters['repulsor'] = {
+    "cooldown": 10,
+    "cost": 20,
+    "melee_damage": 0,
+    "height": 24,
+    "hp": 1,
+    "image": "repulsor.png",
+    "spawn_keys": [],
+    "speed": 12,
+    "width": 24,
+    "x": 924,
+    "y": 475,
+    "name" : 'repulsor',
   };
 
   return characters;

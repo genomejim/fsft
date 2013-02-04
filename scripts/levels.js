@@ -12,8 +12,10 @@ if (lair.hp > 0) {
         add_enemy_unit('werewolf');
       }
     }
-  }
+
   
+  }
+   
 
 
 } else {
@@ -49,6 +51,12 @@ if (npcs_count < 10000  && turn_count > 1000){
       add_enemy_unit('evil_rocket');
     }
   }
+if (turn_count % 200 == 0 && npcs_count < 10000){
+    // spawn repulsor
+    if (Math.random()  > .5){
+      add_enemy_unit('repulsor');
+    }
+  } 
 
 } else {
 
@@ -259,7 +267,12 @@ if (lair.hp > 0) {
       }
     }
   }
-  
+if (turn_count % 100 == 0 && npcs_count < 10000){
+    // spawn repulsor
+    if (Math.random()  > .5){
+      add_enemy_unit('repulsor');
+    }
+  }  
 
   if (turn_count % 20 == 0  && active_npcs_count < 40){
 

@@ -86,9 +86,13 @@ function melee_combat_detection() {
         var coll1 = new collision(npcs[i].x,npcs[i].y,2,chars[j].melee_damage);        
         collisions[collision_count++] = coll;
         collisions[collision_count++] = coll1;
-
-        chars[j].hp = chars[j].hp - npcs[i].melee_damage;
-                
+        
+        if (npcs[i].name == 'repulsor'){
+          //attack player speed
+          chars[j].speed = ( -Math.random() * 0.1 );
+        } else {
+          chars[j].hp = chars[j].hp - npcs[i].melee_damage;
+        }        
         //character deals melee damage to npc
         if (chars[j].name == 'ghost'){
         //attack enemy speed and damage
@@ -98,7 +102,7 @@ function melee_combat_detection() {
           }
 	}
         else {
-        npcs[i].hp = npcs[i].hp - chars[j].melee_damage;
+          npcs[i].hp = npcs[i].hp - chars[j].melee_damage;
         }
         if (npcs[i].hp <= 0) {
           if (i != 0) {
