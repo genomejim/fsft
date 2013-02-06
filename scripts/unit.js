@@ -369,6 +369,38 @@ var get_characters = function() {
     "name" : 'icbm',
   };
 
+  characters['alien'] = {
+    "cooldown": 10,
+    "cost": 100,
+    "melee_damage": .1,
+    "height": 24,
+    "hp": 25,
+    "image": "alien.png",
+    "spawn_keys": [],
+    "yspeed": 0,
+    "xspeed": 3,
+    "width": 24,
+    "x": 924,
+    "y": 460,
+    "name" : 'alien',
+  };
+
+characters['alien_rocket'] = {
+    "cooldown": 10,
+    "cost": 0,
+    "melee_damage": 3,
+    "height": 24,
+    "hp": 8,
+    "image": "alien_rocket.png",
+    "spawn_keys": [],
+    "yspeed": 0,
+    "xspeed": 4,
+    "width": 24,
+    "x": 924,
+    "y": 475,
+    "name" : 'alien_rocket',
+  };
+
   return characters;
 }
 

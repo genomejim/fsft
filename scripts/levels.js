@@ -1,5 +1,11 @@
 function level1(){
 
+
+
+if (turn_count == 200 || turn_count % 500 == 0){
+  add_enemy_unit('alien');
+}
+
 if (lair.hp > 0) {
   if (turn_count % 35 == 0 && active_npcs_count < 20){
 

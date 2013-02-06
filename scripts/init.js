@@ -20,6 +20,10 @@
   var grogon_text = 0;
   var active_level = 1;
   var level_display_name = "Howl on the Moon!";
+  var spray_speed = 2;
+
+  var snd = new Audio("./content/sounds/Howl.m4a");
+  snd.play();
 
 KEY_CODES = {
   'SPACE': [32, 70],

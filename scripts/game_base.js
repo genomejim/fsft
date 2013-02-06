@@ -1,5 +1,3 @@
-
-
 game_base.run = function () {
     game_base.update();
     game_base.draw();
@@ -51,27 +49,39 @@ enemy_unit_spawning = function() {
 unit_movement = function() {
 
 
-  for (var i in npcs) {
-    if (i != 0){
+for (var i in npcs) {
+  if (i != 0){
+    if (npcs[i].name == 'alien_rocket'){
+      npcs[i].x = npcs[i].x - npcs[i].xspeed;
+      npcs[i].y = npcs[i].y - npcs[i].yspeed;
+      if (npcs[i].yspeed > 5) {
+        npcs[i].yspeed = npcs[i].yspeed + 3 * npcs[i].yspeed;
+      }else if (npcs[i].yspeed < -5) {
+        npcs[i].yspeed = npcs[i].yspeed - 3 * npcs[i].yspeed;
+      }
+    } else {
       npcs[i].x = npcs[i].x - npcs[i].xspeed - Math.random() + Math.random();
       npcs[i].y = npcs[i].y - Math.random() + Math.random();
-   
+      if (npcs[i].name == "alien" && turn_count % 3 == 0){
+        add_enemy_unit('alien_rocket',npcs[i].x,npcs[i].y);
+      }              
     }
   }
-  for (var j in chars) {
-    if (j != 0){
-      if (chars[j].name == 'icbm') {
-         chars[j].x = chars[j].x + chars[j].xspeed;
-         chars[j].y = chars[j].y + chars[j].yspeed;
-         chars[j].yspeed = chars[j].yspeed + .1;
-      
-      } else {
-        chars[j].x = chars[j].x + chars[j].xspeed - Math.random() + Math.random();
-        chars[j].y = chars[j].y - Math.random() + Math.random();
-      }
-    }
-  }  
+}
 
+for (var j in chars) {
+  if (j != 0){
+    if (chars[j].name == 'icbm') {
+      chars[j].x = chars[j].x + chars[j].xspeed;
+      chars[j].y = chars[j].y + chars[j].yspeed;
+      chars[j].yspeed = chars[j].yspeed + .1;
+      
+    } else {
+      chars[j].x = chars[j].x + chars[j].xspeed - Math.random() + Math.random();
+      chars[j].y = chars[j].y - Math.random() + Math.random();
+    }
+  }
+}
 }
 
 function melee_combat_detection() {
@@ -115,7 +125,9 @@ function melee_combat_detection() {
           if (i != 0) {
             delete npcs[i];
             score++;
-            active_npcs_count--;
+            if (npcs[i].name != 'alien_rocket'){
+              active_npcs_count--;
+            }
           }
         }
         if (chars[j].hp <= 0) {
@@ -253,7 +265,7 @@ add_unit = function (char_name) {
   return 1;
 }
 
-add_enemy_unit = function(npc_name){
+add_enemy_unit = function(npc_name,x,y){
 
   var npc = new unit(npc_name);
   if (superstition < npc.cost) {
@@ -262,6 +274,14 @@ add_enemy_unit = function(npc_name){
 
   npcs[npcs_count] = npc;
   npcs[npcs_count].xspeed = Math.random() * npcs[npcs_count].xspeed
+  if (npcs[npcs_count].name == 'alien_rocket'){
+          npcs[npcs_count].x = x;
+          npcs[npcs_count].y = y;
+          npcs[npcs_count].yspeed = - Math.random();
+          npcs[npcs_count].xspeed = 5;
+          active_npcs_count--;
+          
+   }
   npcs_count++;
   active_npcs_count++;
   superstition = superstition - npc.cost;        
