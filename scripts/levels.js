@@ -2,7 +2,7 @@ function level1(){
 
 
 
-if (turn_count == 200 || turn_count % 500 == 0){
+if (turn_count % 500 == 0){
   add_enemy_unit('alien');
 }
 
@@ -30,6 +30,7 @@ if (lair.hp > 0) {
     superstition = 100;
     turn_count = 0;
     active_chars_count = 0;
+    active_npcs_count = 0;
     active_level++; 
     for (var i in chars) {
       if (i != 0) {
@@ -71,6 +72,7 @@ if (turn_count % 200 == 0 && npcs_count < 10000){
     superstition = 100;
     turn_count = 0;
     active_chars_count = 0;
+    active_npcs_count = 0;
     active_level++; 
     for (var i in chars) {
       if (i != 0) {
@@ -156,6 +158,7 @@ if (turn_count % 100 == 0 && npcs_count < 10000){
     superstition = 100;
     turn_count = 0;
     active_chars_count = 0;
+    active_npcs_count = 0;
     active_level++; 
     for (var i in chars) {
       if (i != 0) {
@@ -210,7 +213,7 @@ if (lair.hp > 0) {
   }
 
 if (turn_count % 10 == 0  ){
-    if (Math.random() * superstition > 999){
+    if (Math.random() * superstition > 275){
       add_enemy_unit('evil_grogon');
     }
   }
@@ -242,6 +245,7 @@ else {
     superstition = 100;
     turn_count = 0;
     active_chars_count = 0;
+    active_npcs_count = 0;
     active_level++; 
     for (var i in chars) {
       if (i != 0) {
@@ -261,6 +265,7 @@ else {
 function level5(){
 
 if (lair.hp > 0) {
+level_display_name = "Science MUST Prevail!";
   if (active_npcs_count < 30){
 
     if (Math.random() > .5){
@@ -333,6 +338,7 @@ else {
     superstition = 100;
     turn_count = 0;
     active_chars_count = 0;
+    active_npcs_count = 0;
     active_level++; 
     for (var i in chars) {
       if (i != 0) {

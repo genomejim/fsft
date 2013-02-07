@@ -6,6 +6,7 @@ unit = function(character_name) {
   this.name = attr.name
   this.cost = attr.cost;
   this.cooldown = attr.cooldown;
+  this.time_active = attr.time_active;
 
   //location
   this.x = attr.x;
@@ -49,6 +50,7 @@ var get_characters = function() {
     "width": 96,
     "x": 55,
     "y": 450,
+    "name" : 'lab',
   };
 
   characters['lair'] = {
@@ -64,6 +66,7 @@ var get_characters = function() {
     "width": 96,
     "x": 900,
     "y": 450,
+    "name" : 'lair',
   };
 
   characters['scientist'] = {
@@ -79,6 +82,7 @@ var get_characters = function() {
     "width": 24,
     "x": 50,
     "y": 475,
+    "name" : 'scientist',
   };
 
   characters['flying_scientist'] = {
@@ -94,6 +98,7 @@ var get_characters = function() {
     "width": 24,
     "x": 50,
     "y": 475,
+    "name" : 'flying_scientist',
   };
 
   characters['science_trooper'] = {
@@ -109,6 +114,7 @@ var get_characters = function() {
     "width": 48,
     "x": 50,
     "y": 475,
+    "name" : 'science_trooper',
   };
 
   characters['giant_trooper'] = {
@@ -124,6 +130,7 @@ var get_characters = function() {
     "width": 96,
     "x": 50,
     "y": 475,
+    "name" : 'giant_trooper',
   };
 
   characters['pylon'] = {
@@ -139,6 +146,7 @@ var get_characters = function() {
     "width": 24,
     "x": 50,
     "y": 475,
+    "name" : 'pylon',
   };
 
   characters['grogon'] = {
@@ -154,6 +162,7 @@ var get_characters = function() {
     "width": 96,
     "x": 50,
     "y": 475,
+    "name" : 'grogon',
   };
 
   characters['rocket'] = {
@@ -169,6 +178,7 @@ var get_characters = function() {
     "width": 24,
     "x": 50,
     "y": 475,
+    "name" : 'rocket',
   };
  
   characters['evil_scientist'] = {
@@ -184,6 +194,7 @@ var get_characters = function() {
     "width": 24,
     "x": 924,
     "y": 475,
+    "name" : 'evil_scientist',
   };
 
   characters['bat'] = {
@@ -199,6 +210,7 @@ var get_characters = function() {
     "width": 24,
     "x": 924,
     "y": 475,
+    "name" : 'bat',
   };
 
   characters['werewolf'] = {
@@ -214,6 +226,7 @@ var get_characters = function() {
     "width": 48,
     "x": 924,
     "y": 475,
+    "name" : 'werewolf',
   };
 
   characters['vampire'] = {
@@ -229,6 +242,7 @@ var get_characters = function() {
     "width": 48,
     "x": 924,
     "y": 475,
+    "name" : 'vampire',
   };
 
   characters['evil_giant_robot'] = {
@@ -244,6 +258,7 @@ var get_characters = function() {
     "width": 48,
     "x": 924,
     "y": 475,
+    "name" : 'evil_giant_robot',
   };
 
   characters['evil_pylon'] = {
@@ -259,6 +274,7 @@ var get_characters = function() {
     "width": 24,
     "x": 924,
     "y": 475,
+    "name" : 'evil_pylon',
   };
 
   characters['beast'] = {
@@ -274,6 +290,7 @@ var get_characters = function() {
     "width": 48,
     "x": 924,
     "y": 475,
+    "name" : 'beast',
   };
 
   characters['mole'] = {
@@ -289,11 +306,12 @@ var get_characters = function() {
     "width": 48,
     "x": 924,
     "y": 475,
+    "name" : 'mole',
   };
 
   characters['evil_grogon'] = {
     "cooldown": 100,
-    "cost": 1000,
+    "cost": 500,
     "melee_damage": 25,
     "height": 222,
     "hp": 700,
@@ -304,6 +322,7 @@ var get_characters = function() {
     "width": 256,
     "x": 924,
     "y": 475,
+    "name" : 'evil_grogon',
   };
 
   characters['evil_rocket'] = {
@@ -319,6 +338,7 @@ var get_characters = function() {
     "width": 24,
     "x": 924,
     "y": 475,
+    "name" : 'evil_rocket',
   };
 
   characters['ghost'] = {
@@ -399,6 +419,7 @@ characters['alien_rocket'] = {
     "x": 924,
     "y": 475,
     "name" : 'alien_rocket',
+    "time_active": 0,
   };
 
   return characters;

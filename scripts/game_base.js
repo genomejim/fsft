@@ -54,6 +54,12 @@ for (var i in npcs) {
     if (npcs[i].name == 'alien_rocket'){
       npcs[i].x = npcs[i].x - npcs[i].xspeed;
       npcs[i].y = npcs[i].y - npcs[i].yspeed;
+      npcs[i].time_active++;
+      npcs[i].yspeed = npcs[i].yspeed - .03;
+      if (npcs[i].time_active > 200) {
+        delete npcs[i];
+        npcs_active_count--;
+      }
       if (npcs[i].yspeed > 5) {
         npcs[i].yspeed = npcs[i].yspeed + 3 * npcs[i].yspeed;
       }else if (npcs[i].yspeed < -5) {
@@ -61,8 +67,8 @@ for (var i in npcs) {
       }
     } else {
       npcs[i].x = npcs[i].x - npcs[i].xspeed - Math.random() + Math.random();
-      npcs[i].y = npcs[i].y - Math.random() + Math.random();
-      if (npcs[i].name == "alien" && turn_count % 3 == 0){
+      npcs[i].y = npcs[i].y + npcs[i].yspeed - Math.random() + Math.random();
+      if (npcs[i].name == "alien" && (turn_count % 9 == 0 || turn_count % 11 == 0)){
         add_enemy_unit('alien_rocket',npcs[i].x,npcs[i].y);
       }              
     }
@@ -124,10 +130,11 @@ function melee_combat_detection() {
         if (npcs[i].hp <= 0) {
           if (i != 0) {
             delete npcs[i];
-            score++;
-            if (npcs[i].name != 'alien_rocket'){
+            if (npcs[i].name != 'alient_rocket'){
               active_npcs_count--;
             }
+            score++;
+            
           }
         }
         if (chars[j].hp <= 0) {
@@ -176,7 +183,7 @@ game_base.draw = function() {
 	_canvasBufferContext.fillText(lair.hp, 670, 5);
         _canvasBufferContext.fillText('superstition = ', 770, 5);
 	_canvasBufferContext.fillText(superstition, 880, 5);
-        _canvasBufferContext.fillText('v 0.3.2', 960, 5);
+        _canvasBufferContext.fillText('v 0.4.0', 960, 5);
         _canvasBufferContext.fillStyle    = 'rgba(100, 100, 100, 0.5)';
         _canvasBufferContext.fillText("w = flying scientist 7", 10, 25);
         _canvasBufferContext.fillText("a = giant trooper 100",10, 40);
@@ -277,9 +284,11 @@ add_enemy_unit = function(npc_name,x,y){
   if (npcs[npcs_count].name == 'alien_rocket'){
           npcs[npcs_count].x = x;
           npcs[npcs_count].y = y;
-          npcs[npcs_count].yspeed = - Math.random();
+          npcs[npcs_count].yspeed = 1.5 *Math.random();
           npcs[npcs_count].xspeed = 5;
-          active_npcs_count--;
+          npcs[npcs_count].time_active = 0;
+         active_npcs_count--;
+          
           
    }
   npcs_count++;
