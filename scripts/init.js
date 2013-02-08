@@ -21,6 +21,7 @@
   var active_level = 1;
   var level_display_name = "Howl on the Moon!";
   var spray_speed = 2;
+  var pylon_spawn_x = 25;
 
   var snd = new Audio("./content/sounds/Howl.m4a");
   snd.play();

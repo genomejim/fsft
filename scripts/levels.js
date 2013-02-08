@@ -1,12 +1,15 @@
 function level1(){
 
 
-
-if (turn_count % 500 == 0){
-  add_enemy_unit('alien');
-}
-
 if (lair.hp > 0) {
+
+  if (turn_count > 0 && turn_count % 10000 == 0  ){
+      superstition = superstition + 500;
+      add_enemy_unit('evil_grogon');
+  }
+  if (turn_count % 500 == 0 && Math.random() > .5){
+      add_enemy_unit('alien');
+    }
   if (turn_count % 35 == 0 && active_npcs_count < 20){
 
     if (Math.random() > .5){
@@ -19,7 +22,10 @@ if (lair.hp > 0) {
       }
     }
 
-  
+    
+    
+    
+      
   }
    
 
@@ -212,10 +218,10 @@ if (lair.hp > 0) {
     }
   }
 
-if (turn_count % 10 == 0  ){
-    if (Math.random() * superstition > 275){
+if (turn_count > 0 && turn_count % 2000 == 0  ){
+      superstition = superstition + 500;
       add_enemy_unit('evil_grogon');
-    }
+    
   }
 
 if (turn_count % 60 == 0 && npcs_count < 10000){
@@ -266,6 +272,9 @@ function level5(){
 
 if (lair.hp > 0) {
 level_display_name = "Science MUST Prevail!";
+  if (turn_count % 500 == 0 && Math.random() > .5){
+      add_enemy_unit('alien');
+    } 
   if (active_npcs_count < 30){
 
     if (Math.random() > .5){
@@ -314,11 +323,11 @@ if (turn_count % 10 == 0  ){
 if (turn_count % 60 == 0 && npcs_count < 10000){
   var beast_meta = CHR['beast'];
   if (Math.random() > .5){
-    if (Math.random() * superstition > beast_meta.cost - 1  && active_npcs_count < 57){   
+    if (Math.random() * superstition > beast_meta.cost  && active_npcs_count < 57){   
       add_enemy_unit('beast');
     }
   } else { 
-    if (Math.random() * superstition > beast_meta.cost - 1  && active_npcs_count < 57){   
+    if (Math.random() * superstition > beast_meta.cost  && active_npcs_count < 57){   
       add_enemy_unit('mole');
     }
   }

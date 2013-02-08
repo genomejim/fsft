@@ -58,7 +58,7 @@ for (var i in npcs) {
       npcs[i].yspeed = npcs[i].yspeed - .03;
       if (npcs[i].time_active > 200) {
         delete npcs[i];
-        npcs_active_count--;
+        //active_npcs_count--;
       }
       if (npcs[i].yspeed > 5) {
         npcs[i].yspeed = npcs[i].yspeed + 3 * npcs[i].yspeed;
@@ -82,7 +82,10 @@ for (var j in chars) {
       chars[j].y = chars[j].y + chars[j].yspeed;
       chars[j].yspeed = chars[j].yspeed + .1;
       
-    } else {
+    }else if (chars[j].name == 'pylon') {
+      //pylons don't move, they are pylons
+    }
+    else {
       chars[j].x = chars[j].x + chars[j].xspeed - Math.random() + Math.random();
       chars[j].y = chars[j].y - Math.random() + Math.random();
     }
@@ -95,10 +98,11 @@ function melee_combat_detection() {
 //melee combat detection
   for (var i in npcs) {
     for (var j in chars) {
-
-      if (!npcs[i] || !chars[j]) {
-        continue; // avoid deleted elements
-      }
+      
+        if (!npcs[i] || !chars[j]) {
+          continue; // avoid deleted elements
+        }
+         
 
       if (Math.abs(chars[j].x - npcs[i].x) < 50 && Math.abs(chars[j].y - npcs[i].y) < 50)  {                
         //npc deals melee damage to character
@@ -129,18 +133,23 @@ function melee_combat_detection() {
         }
         if (npcs[i].hp <= 0) {
           if (i != 0) {
-            delete npcs[i];
-            if (npcs[i].name != 'alient_rocket'){
-              active_npcs_count--;
+            if (npcs[i].name == 'alien_rocket'){
+              active_npcs_count++;
             }
+            delete npcs[i];
+            active_npcs_count--;
             score++;
             
           }
         }
         if (chars[j].hp <= 0) {
+          if (chars[j].name == 'lab'){
+            window.alert("Sadly, Science has been defeated by Superstition");
+          }
           delete chars[j];
           score--;
           active_chars_count--;
+          
         }
       }               
     }
@@ -178,7 +187,7 @@ game_base.draw = function() {
         _canvasBufferContext.fillText('science = ', 200, 5);
         _canvasBufferContext.fillText(science, 270, 5);
         _canvasBufferContext.fillText('lab = ', 400, 5);
-	_canvasBufferContext.fillText(chars[0].hp, 470, 5);
+	_canvasBufferContext.fillText(Math.round(chars[0].hp), 470, 5);
         _canvasBufferContext.fillText('lair = ', 600, 5);
 	_canvasBufferContext.fillText(lair.hp, 670, 5);
         _canvasBufferContext.fillText('superstition = ', 770, 5);
@@ -255,16 +264,23 @@ game_base.draw = function() {
   _canvasContext.drawImage(_canvasBuffer, 0 , 0);	
 }
 
-add_unit = function (char_name) {
+add_unit = function (char_name,x,y) {
 
   var char = new unit(char_name);
   if (science < char.cost || player_cooldown < char.cooldown) {
     return 0;
   }
-  if (active_chars_count >= 50 && char_name == "pylon") {
+  if (active_chars_count >= 75 && char_name == "pylon") {
     return 0;
   }
   chars[chars_count] = char;
+  if (chars[chars_count].name == 'pylon'){
+    chars[chars_count].x = pylon_spawn_x;
+    pylon_spawn_x = pylon_spawn_x + 2;
+    if (pylon_spawn_x > 105){
+      pylon_spawn_x = 26;
+    }
+  }    
   chars_count++;
   player_cooldown = 0;
   active_chars_count++;

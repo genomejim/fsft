@@ -70,7 +70,7 @@ var get_characters = function() {
   };
 
   characters['scientist'] = {
-    "cooldown": 30,
+    "cooldown": 15,
     "cost": 5,
     "melee_damage": 3,
     "height": 24,
@@ -134,7 +134,7 @@ var get_characters = function() {
   };
 
   characters['pylon'] = {
-    "cooldown": 20,
+    "cooldown": 10,
     "cost": 10,
     "melee_damage": 1,
     "height": 24,
@@ -378,10 +378,10 @@ var get_characters = function() {
     "cost": 200,
     "melee_damage": 100,
     "height": 48,
-    "hp": 25,
+    "hp": 50,
     "image": "icbm.png",
     "spawn_keys": ['r'],
-    "yspeed": -5,
+    "yspeed": -5.5,
     "xspeed": 8,
     "width": 48,
     "x": 50,
