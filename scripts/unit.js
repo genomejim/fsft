@@ -424,7 +424,7 @@ characters['alien_rocket'] = {
 
 characters['defense_pylon'] = {
     "cooldown": 100,
-    "cost": 1,
+    "cost": 500,
     "melee_damage": 15,
     "height": 24,
     "hp": 2000,

@@ -135,7 +135,7 @@ for (var j in chars) {
       chars[j].y = chars[j].y - chars[j].yspeed;
       chars[j].time_active++;
       chars[j].yspeed = chars[j].yspeed - .02;
-      if (chars[j].time_active > 200) {
+      if (chars[j].time_active > 100) {
         delete chars[j];
         //active_npcs_count--;
       }
