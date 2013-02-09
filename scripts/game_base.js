@@ -77,17 +77,31 @@ for (var i in npcs) {
 
 for (var j in chars) {
   if (j != 0){
+    if (chars[j].name == 'pylon_rocket'){
+      chars[j].x = chars[j].x + chars[j].xspeed;
+      chars[j].y = chars[j].y - chars[j].yspeed;
+      chars[j].time_active++;
+      chars[j].yspeed = chars[j].yspeed - .02;
+      if (chars[j].time_active > 200) {
+        delete chars[j];
+        //active_npcs_count--;
+      }
+    }
     if (chars[j].name == 'icbm') {
       chars[j].x = chars[j].x + chars[j].xspeed;
       chars[j].y = chars[j].y + chars[j].yspeed;
       chars[j].yspeed = chars[j].yspeed + .1;
       
-    }else if (chars[j].name == 'pylon') {
-      //pylons don't move, they are pylons
+    }else if (chars[j].name == 'pylon' || chars[j].name == 'defense_pylon') {
+       //pylons don't move, they are pylons
+       if (chars[j].name == "defense_pylon" && turn_count % 2 == 0){
+         add_unit('pylon_rocket',chars[j].x,chars[j].y);
+        }  
     }
     else {
       chars[j].x = chars[j].x + chars[j].xspeed - Math.random() + Math.random();
       chars[j].y = chars[j].y - Math.random() + Math.random();
+                  
     }
   }
 }
@@ -203,7 +217,8 @@ game_base.draw = function() {
         _canvasBufferContext.fillText("space = rocket 5", 10, 115);
         _canvasBufferContext.fillText("z = ghost 300", 10, 130);
         _canvasBufferContext.fillText("r = icbm 200", 10, 145);
-        _canvasBufferContext.fillText("p = pause", 10, 160);
+        _canvasBufferContext.fillText("x = defense pylon 500", 10, 160);
+        _canvasBufferContext.fillText("p = pause", 10, 175);
         _canvasBufferContext.fillStyle    = 'rgba(1000, 1000, 1000, 0.9)';
         _canvasBufferContext.fillText('Science Force = ', 10, 520);
 	_canvasBufferContext.fillText(active_chars_count, 140, 520);
@@ -280,9 +295,16 @@ add_unit = function (char_name,x,y) {
     if (pylon_spawn_x > 105){
       pylon_spawn_x = 26;
     }
-  }    
+  } 
+  if (chars[chars_count].name == 'pylon_rocket'){
+    chars[chars_count].x = x;
+    chars[chars_count].y = y;
+    chars[chars_count].yspeed = 2 * Math.random();
+    chars[chars_count].xspeed = 3;
+    chars[chars_count].time_active = 0;    
+  }      
   chars_count++;
-  player_cooldown = 0;
+  //player_cooldown = 0;
   active_chars_count++;
   science = science - char.cost;
   return 1;
@@ -300,10 +322,10 @@ add_enemy_unit = function(npc_name,x,y){
   if (npcs[npcs_count].name == 'alien_rocket'){
           npcs[npcs_count].x = x;
           npcs[npcs_count].y = y;
-          npcs[npcs_count].yspeed = 1.5 *Math.random();
+          npcs[npcs_count].yspeed = 1.5 * Math.random();
           npcs[npcs_count].xspeed = 5;
           npcs[npcs_count].time_active = 0;
-         active_npcs_count--;
+          //active_npcs_count--;
           
           
    }

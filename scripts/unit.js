@@ -118,7 +118,7 @@ var get_characters = function() {
   };
 
   characters['giant_trooper'] = {
-    "cooldown": 10,
+    "cooldown": 20,
     "cost": 100,
     "melee_damage": 7,
     "height": 96,
@@ -314,7 +314,7 @@ var get_characters = function() {
     "cost": 500,
     "melee_damage": 25,
     "height": 222,
-    "hp": 700,
+    "hp": 1400,
     "image": "evil_grogon.png",
     "spawn_keys": [],
     "yspeed": 0,
@@ -419,6 +419,40 @@ characters['alien_rocket'] = {
     "x": 924,
     "y": 475,
     "name" : 'alien_rocket',
+    "time_active": 0,
+  };
+
+characters['defense_pylon'] = {
+    "cooldown": 100,
+    "cost": 1,
+    "melee_damage": 15,
+    "height": 24,
+    "hp": 2000,
+    "image": "pylon.png",
+    "spawn_keys": ['x'],
+    "yspeed": 0,
+    "xspeed": 0,
+    "width": 24,
+    "x": 200,
+    "y": 475,
+    "name" : 'defense_pylon',
+    "time_active": 0,
+  };
+
+characters['pylon_rocket'] = {
+    "cooldown": 0,
+    "cost": 0,
+    "melee_damage": 3,
+    "height": 24,
+    "hp": 8,
+    "image": "alien_rocket.png",
+    "spawn_keys": [],
+    "yspeed": -1,
+    "xspeed": 3,
+    "width": 24,
+    "x": 0,
+    "y": 475,
+    "name" : 'pylon_rocket',
     "time_active": 0,
   };
 
