@@ -160,9 +160,13 @@ function melee_combat_detection() {
           if (chars[j].name == 'lab'){
             window.alert("Sadly, Science has been defeated by Superstition");
           }
+          if (chars[j].name == 'pylon_rocket'){
+          } else {
+            active_chars_count--;
+            score--;
+          }
           delete chars[j];
-          score--;
-          active_chars_count--;
+          
           
         }
       }               
@@ -302,10 +306,15 @@ add_unit = function (char_name,x,y) {
     chars[chars_count].yspeed = 2 * Math.random();
     chars[chars_count].xspeed = 3;
     chars[chars_count].time_active = 0;    
-  }      
-  chars_count++;
-  //player_cooldown = 0;
-  active_chars_count++;
+  }  else {
+    active_chars_count++;     
+    player_cooldown = 0;
+    //display cooldown by changing button opacity
+    rect1.setOpacity(.1);
+    //rect1.setFill('red');
+    button_layer.draw();
+  }
+  chars_count++;    
   science = science - char.cost;
   return 1;
 }
@@ -328,9 +337,11 @@ add_enemy_unit = function(npc_name,x,y){
           //active_npcs_count--;
           
           
+   } else {
+     active_npcs_count++;
    }
   npcs_count++;
-  active_npcs_count++;
+  //active_npcs_count++;
   superstition = superstition - npc.cost;        
   return npc;
 }    
