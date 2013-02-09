@@ -48,6 +48,59 @@ enemy_unit_spawning = function() {
 
 unit_movement = function() {
 
+//set button opacity based on cooldown
+  rect1.setOpacity(player_cooldown/15); //scientist
+  rect2.setOpacity(player_cooldown/20); //trooper
+  rect3.setOpacity(player_cooldown/10); //pylon
+  rect4.setOpacity(player_cooldown/15); //giant trooper
+  rect5.setOpacity(player_cooldown/15); //grogon
+  rect6.setOpacity(player_cooldown/15); //rocket
+  rect7.setOpacity(player_cooldown/15); //scientist
+  //rect8.setOpacity(player_cooldown/15); //scientist
+//set button color based on available science
+  if (science < 5) {
+    rect1.setFill('gray'); //scientist
+    rect1.setOpacity(.3);
+  } else {
+    rect1.setFill('green'); //scientist
+  }
+  if (science < 10) {
+    rect2.setFill('gray'); //trooper
+    rect2.setOpacity(.3);
+  } else {
+    rect2.setFill('green'); //trooper
+  }
+  if (science < 10) {
+    rect3.setFill('gray'); //pylon
+    rect3.setOpacity(.3);
+  } else {
+    rect3.setFill('green'); //pylon
+  }
+  if (science < 100) {
+    rect4.setFill('gray'); //giant trooper
+    rect4.setOpacity(.3);
+  } else {
+    rect4.setFill('green'); //giant trooper
+  }
+  if (science < 1000) {
+    rect5.setFill('gray'); //grogon
+    rect5.setOpacity(.3);
+  } else {
+    rect5.setFill('green'); //grogon
+  }
+  if (science < 5) {
+    rect6.setFill('gray'); //rocket
+    rect6.setOpacity(.3);
+  } else {
+    rect6.setFill('green'); //rocket
+  }
+  if (science < 300) {
+    rect7.setFill('gray'); //ghost
+    rect7.setOpacity(.3);
+  } else {
+    rect7.setFill('green'); //ghost
+  }
+  button_layer.draw();
 
 for (var i in npcs) {
   if (i != 0){
@@ -309,10 +362,10 @@ add_unit = function (char_name,x,y) {
   }  else {
     active_chars_count++;     
     player_cooldown = 0;
-    //display cooldown by changing button opacity
-    rect1.setOpacity(.1);
+    //display cooldown by changing button opacity - moved to game loop
+    //rect1.setOpacity(.1);
     //rect1.setFill('red');
-    button_layer.draw();
+    //button_layer.draw();
   }
   chars_count++;    
   science = science - char.cost;
