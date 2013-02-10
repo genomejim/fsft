@@ -121,13 +121,13 @@ if (lair.hp > 0) {
       add_enemy_unit('vampire');
     }
   }
-  if (turn_count % 50 == 0 && active_npcs_count < 52){
+  if (turn_count % 50 == 0 && active_npcs_count < 77){
     if (Math.random() * superstition > 150){
       add_enemy_unit('evil_giant_robot');
     }
   }
 
-  if (turn_count % 40 == 0 && active_npcs_count < 50){
+  if (turn_count % 40 == 0 && active_npcs_count < 75){
     if (Math.random() * superstition > 80 ){
       add_enemy_unit('evil_pylon');
     }
@@ -142,11 +142,11 @@ if (turn_count % 10 == 0  ){
 if (turn_count % 60 == 0 && npcs_count < 10000){
   var beast_meta = CHR['beast'];
   if (Math.random() > .5){
-    if (Math.random() * superstition > beast_meta.cost - 1  && active_npcs_count < 57){   
+    if (Math.random() * superstition > beast_meta.cost - 1  && active_npcs_count < 76){   
       add_enemy_unit('beast');
     }
   } else { 
-    if (Math.random() * superstition > beast_meta.cost - 1  && active_npcs_count < 57){   
+    if (Math.random() * superstition > beast_meta.cost - 1  && active_npcs_count < 77){   
       add_enemy_unit('mole');
     }
   }
@@ -206,13 +206,13 @@ if (lair.hp > 0) {
       add_enemy_unit('vampire');
     }
   }
-  if (turn_count % 30 == 0 && active_npcs_count < 50){
+  if (turn_count % 30 == 0 && active_npcs_count < 81){
     if (Math.random() * superstition > 150){
       add_enemy_unit('evil_giant_robot');
     }
   }
 
-  if (turn_count % 40 == 0 && active_npcs_count < 70){
+  if (turn_count % 40 == 0 && active_npcs_count < 80){
     if (Math.random() * superstition > 80 ){
       add_enemy_unit('evil_pylon');
     }
@@ -227,11 +227,11 @@ if (turn_count > 0 && turn_count % 2000 == 0  ){
 if (turn_count % 60 == 0 && npcs_count < 10000){
   var beast_meta = CHR['beast'];
   if (Math.random() > .5){
-    if (Math.random() * superstition > beast_meta.cost - 1  && active_npcs_count < 57){   
+    if (Math.random() * superstition > beast_meta.cost - 1  && active_npcs_count < 81){   
       add_enemy_unit('beast');
     }
   } else { 
-    if (Math.random() * superstition > beast_meta.cost - 1  && active_npcs_count < 57){   
+    if (Math.random() * superstition > beast_meta.cost - 1  && active_npcs_count < 82){   
       add_enemy_unit('mole');
     }
   }

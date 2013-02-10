@@ -104,6 +104,9 @@ unit_movement = function() {
 
 for (var i in npcs) {
   if (i != 0){
+
+    npcs[i].img.style.opacity = npcs[i].hp / npcs[i].starting_hp;
+
     if (npcs[i].name == 'alien_rocket'){
       npcs[i].x = npcs[i].x - npcs[i].xspeed;
       npcs[i].y = npcs[i].y - npcs[i].yspeed;
@@ -130,7 +133,11 @@ for (var i in npcs) {
 
 for (var j in chars) {
   if (j != 0){
-    if (chars[j].name == 'pylon_rocket'){
+
+//    chars[j].img.style.opacity = chars[j].hp / chars[j].starting_hp;
+    chars[j].img.style.filter       = "alpha(opacity=75)";
+
+    if (chars[j].name == 'pylon_rocket' || chars[j].name == 'pogo_rocket' || chars[j].name == 'pogo_plane'){
       chars[j].x = chars[j].x + chars[j].xspeed;
       chars[j].y = chars[j].y - chars[j].yspeed;
       chars[j].time_active++;
@@ -150,6 +157,12 @@ for (var j in chars) {
        if (chars[j].name == "defense_pylon" && turn_count % 2 == 0){
          add_unit('pylon_rocket',chars[j].x,chars[j].y);
         }  
+    }else if (chars[j].name == 'pogo_plane') {
+              
+         add_unit('pogo_rocket',chars[j].x,chars[j].y);
+         chars[j].x = chars[j].x + chars[j].xspeed - Math.random() + Math.random();
+         chars[j].y = chars[j].y - Math.random() + Math.random();
+          
     }
     else {
       chars[j].x = chars[j].x + chars[j].xspeed - Math.random() + Math.random();
@@ -213,7 +226,7 @@ function melee_combat_detection() {
           if (chars[j].name == 'lab'){
             window.alert("Sadly, Science has been defeated by Superstition");
           }
-          if (chars[j].name == 'pylon_rocket'){
+          if (chars[j].name == 'pylon_rocket' || chars[j].name == 'pogo_rocket' ){
           } else {
             active_chars_count--;
             score--;
@@ -353,10 +366,13 @@ add_unit = function (char_name,x,y) {
       pylon_spawn_x = 26;
     }
   } 
-  if (chars[chars_count].name == 'pylon_rocket'){
+  if (chars[chars_count].name == 'pylon_rocket' || chars[chars_count].name == 'pogo_rocket'){
     chars[chars_count].x = x;
     chars[chars_count].y = y;
     chars[chars_count].yspeed = 2 * Math.random();
+    if (chars[chars_count].name == 'pogo_rocket'){
+      chars[chars_count].yspeed = - 2 * Math.random();
+    }
     chars[chars_count].xspeed = 3;
     chars[chars_count].time_active = 0;    
   }  else {
@@ -367,6 +383,7 @@ add_unit = function (char_name,x,y) {
     //rect1.setFill('red');
     //button_layer.draw();
   }
+  //chars[chars_count].img.style.filter = "alpha(opacity=75)";
   chars_count++;    
   science = science - char.cost;
   return 1;

@@ -21,10 +21,12 @@ unit = function(character_name) {
 
   //display
   this.img = new Image();
-  this.img.src = "content/images/" + attr.image; 
+  this.img.src = "content/images/" + attr.image;
+  this.img.style.filter = "alpha(opacity=75)"; 
 
   //defensive combat stats
   this.hp = attr.hp;
+  this.starting_hp = attr.starting_hp
 
   //offensive combat stats
   this.melee_damage = attr.melee_damage;
@@ -43,6 +45,7 @@ var get_characters = function() {
     "melee_damage": 3,
     "height": 96,
     "hp": 500,
+    "starting_hp": 500,
     "image": "lab.png",
     "spawn_keys": [],
     "xspeed": 0,
@@ -59,6 +62,7 @@ var get_characters = function() {
     "melee_damage": 3,
     "height": 96,
     "hp": 10000,
+    "starting_hp": 10000,
     "image": "lair.png",
     "spawn_keys": [],
     "yspeed": 0,
@@ -75,6 +79,7 @@ var get_characters = function() {
     "melee_damage": 3,
     "height": 24,
     "hp": 100,
+    "starting_hp": 100,
     "image": "scientist.png",
     "spawn_keys": ['RIGHT'],
     "yspeed": 0,
@@ -91,6 +96,7 @@ var get_characters = function() {
     "melee_damage": 5,
     "height": 24,
     "hp": 75,
+    "starting_hp": 75,
     "image": "flying_scientist.png",
     "spawn_keys": ['UP'],
     "yspeed": 0,
@@ -107,6 +113,7 @@ var get_characters = function() {
     "melee_damage": 4,
     "height": 48,
     "hp": 200,
+    "starting_hp": 200,
     "image": "science_trooper.png",
     "spawn_keys": ['DOWN'],
     "yspeed": 0,
@@ -123,6 +130,7 @@ var get_characters = function() {
     "melee_damage": 7,
     "height": 96,
     "hp": 1250,
+    "starting_hp": 1250,
     "image": "giant_trooper.png",
     "spawn_keys": ['LEFT'],
     "yspeed": 0,
@@ -139,6 +147,7 @@ var get_characters = function() {
     "melee_damage": 1,
     "height": 24,
     "hp": 10,
+    "starting_hp": 10,
     "image": "pylon.png",
     "spawn_keys": ['q'],
     "yspeed": 0,
@@ -155,6 +164,7 @@ var get_characters = function() {
     "melee_damage": 25,
     "height": 126,
     "hp": 17500,
+    "starting_hp": 17500,
     "image": "grogon.png",
     "spawn_keys": ['e'],
     "yspeed": 0,
@@ -171,6 +181,7 @@ var get_characters = function() {
     "melee_damage": 30,
     "height": 24,
     "hp": 5,
+    "starting_hp": 5,
     "image": "rocket.png",
     "spawn_keys": ['SPACE'],
     "yspeed": 0,
@@ -187,6 +198,7 @@ var get_characters = function() {
     "melee_damage": 3,
     "height": 24,
     "hp": 100,
+    "starting_hp": 100,
     "image": "evil_scientist.png",
     "spawn_keys": [],
     "yspeed": 0,
@@ -203,6 +215,7 @@ var get_characters = function() {
     "melee_damage": 3,
     "height": 24,
     "hp": 100,
+    "starting_hp": 100,
     "image": "bat.png",
     "spawn_keys": [],
     "yspeed": 0,
@@ -219,6 +232,7 @@ var get_characters = function() {
     "melee_damage": 4,
     "height": 48,
     "hp": 200,
+    "starting_hp": 200,
     "image": "werewolf.png",
     "spawn_keys": [],
     "yspeed": 0,
@@ -235,6 +249,7 @@ var get_characters = function() {
     "melee_damage": 4,
     "height": 48,
     "hp": 200,
+    "starting_hp": 200,
     "image": "vampire.png",
     "spawn_keys": [],
     "yspeed": 0,
@@ -251,6 +266,7 @@ var get_characters = function() {
     "melee_damage": 7,
     "height": 96,
     "hp": 1250,
+    "starting_hp": 1250,
     "image": "evil_giant_robot.png",
     "spawn_keys": [],
     "yspeed": 0,
@@ -267,6 +283,7 @@ var get_characters = function() {
     "melee_damage": 1,
     "height": 24,
     "hp": 10,
+    "starting_hp": 10,
     "image": "pylon.png",
     "spawn_keys": [],
     "xspeed": 0,
@@ -283,6 +300,7 @@ var get_characters = function() {
     "melee_damage": 15,
     "height": 48,
     "hp": 700,
+    "starting_hp": 700,
     "image": "beast.png",
     "spawn_keys": [],
     "yspeed": 0,
@@ -299,6 +317,7 @@ var get_characters = function() {
     "melee_damage": 15,
     "height": 48,
     "hp": 700,
+    "starting_hp": 700,
     "image": "mole.png",
     "spawn_keys": [],
     "yspeed": 0,
@@ -315,6 +334,7 @@ var get_characters = function() {
     "melee_damage": 25,
     "height": 222,
     "hp": 1400,
+    "starting_hp": 1400,
     "image": "evil_grogon.png",
     "spawn_keys": [],
     "yspeed": 0,
@@ -331,6 +351,7 @@ var get_characters = function() {
     "melee_damage": 30,
     "height": 24,
     "hp": 5,
+    "starting_hp": 5,
     "image": "rocket.png",
     "spawn_keys": ['space'],
     "yspeed": 0,
@@ -347,6 +368,7 @@ var get_characters = function() {
     "melee_damage": 0,
     "height": 24,
     "hp": 100,
+    "starting_hp": 100,
     "image": "ghost.png",
     "spawn_keys": ['z'],
     "yspeed": 0,
@@ -363,6 +385,7 @@ var get_characters = function() {
     "melee_damage": 0,
     "height": 24,
     "hp": 1,
+    "starting_hp": 1,
     "image": "repulsor.png",
     "spawn_keys": [],
     "yspeed": 0,
@@ -379,6 +402,7 @@ var get_characters = function() {
     "melee_damage": 100,
     "height": 48,
     "hp": 50,
+    "starting_hp": 50,
     "image": "icbm.png",
     "spawn_keys": ['r'],
     "yspeed": -5.5,
@@ -395,6 +419,7 @@ var get_characters = function() {
     "melee_damage": .1,
     "height": 24,
     "hp": 25,
+    "starting_hp": 25,
     "image": "alien.png",
     "spawn_keys": [],
     "yspeed": 0,
@@ -405,12 +430,13 @@ var get_characters = function() {
     "name" : 'alien',
   };
 
-characters['alien_rocket'] = {
+  characters['alien_rocket'] = {
     "cooldown": 10,
     "cost": 0,
     "melee_damage": 3,
     "height": 24,
     "hp": 8,
+    "starting_hp": 8,
     "image": "alien_rocket.png",
     "spawn_keys": [],
     "yspeed": 0,
@@ -422,12 +448,13 @@ characters['alien_rocket'] = {
     "time_active": 0,
   };
 
-characters['defense_pylon'] = {
+  characters['defense_pylon'] = {
     "cooldown": 100,
     "cost": 500,
     "melee_damage": 15,
     "height": 24,
     "hp": 2000,
+    "starting_hp": 2000,
     "image": "pylon.png",
     "spawn_keys": ['x'],
     "yspeed": 0,
@@ -439,12 +466,13 @@ characters['defense_pylon'] = {
     "time_active": 0,
   };
 
-characters['pylon_rocket'] = {
+  characters['pylon_rocket'] = {
     "cooldown": 0,
     "cost": 0,
     "melee_damage": 3,
     "height": 24,
     "hp": 8,
+    "starting_hp": 8,
     "image": "alien_rocket.png",
     "spawn_keys": [],
     "yspeed": -1,
@@ -453,6 +481,42 @@ characters['pylon_rocket'] = {
     "x": 0,
     "y": 475,
     "name" : 'pylon_rocket',
+    "time_active": 0,
+  };
+
+  characters['pogo_plane'] = {
+    "cooldown": 100,
+    "cost": 1,
+    "melee_damage": 15,
+    "height": 63,
+    "hp": 300,
+    "starting_hp": 300,
+    "image": "pogo_plane.png",
+    "spawn_keys": ['t'],
+    "yspeed": 0,
+    "xspeed": 2,
+    "width": 64,
+    "x": 200,
+    "y": 275,
+    "name" : 'pogo_plane',
+    "time_active": 0,
+  };
+
+ characters['pogo_rocket'] = {
+    "cooldown": 0,
+    "cost": 0,
+    "melee_damage": 3,
+    "height": 24,
+    "hp": 8,
+    "starting_hp": 8,
+    "image": "alien_rocket.png",
+    "spawn_keys": [],
+    "yspeed": 1,
+    "xspeed": 3,
+    "width": 24,
+    "x": 0,
+    "y": 475,
+    "name" : 'pogo_rocket',
     "time_active": 0,
   };
 
