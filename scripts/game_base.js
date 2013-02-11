@@ -163,7 +163,7 @@ for (var j in chars) {
       
     }else if (chars[j].name == 'pylon' || chars[j].name == 'defense_pylon') {
        //pylons don't move, they are pylons
-       if (chars[j].name == "defense_pylon" && turn_count % 2 == 0){
+       if (chars[j].name == "defense_pylon" && turn_count % 5 == 0){
          add_unit('pylon_rocket',chars[j].x,chars[j].y);
         }  
     }else if (chars[j].name == 'pogo_plane') {
@@ -235,13 +235,35 @@ function melee_combat_detection() {
         if (chars[j].hp <= 0) {
           if (chars[j].name == 'lab'){
             window.alert("Sadly, Science has been defeated by Superstition");
+            chars[j].hp = 500;
+            lair.hp=10000;
+            superstition = 100;
+            turn_count = 0;
+            active_chars_count = 0;
+            active_npcs_count = 0;
+            active_level = 1; 
+            for (var i in chars) {
+              if (i != 0) {
+                delete chars[i];
+              }
+          }
+            for (var j in npcs) {
+              if (j != 0) {
+                delete npcs[j];
+              }
+          }
+          //window.alert("Restarting with Level 1");
+          //  level1();
+            
           }
           if (chars[j].name == 'pylon_rocket' || chars[j].name == 'pogo_rocket' ){
           } else {
             active_chars_count--;
             score--;
           }
-          delete chars[j];
+          if (chars[j].name != 'lab'){
+            delete chars[j];
+          }
           
           
         }

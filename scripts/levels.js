@@ -272,6 +272,12 @@ function level5(){
 
 if (lair.hp > 0) {
 level_display_name = "Science MUST Prevail!";
+
+  if (turn_count > 0 && turn_count % 2000 == 0  ){
+      superstition = superstition + 500;
+      add_enemy_unit('evil_grogon');
+    
+  }
   if (turn_count % 500 == 0 && Math.random() > .5){
       add_enemy_unit('alien');
     } 
