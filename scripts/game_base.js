@@ -125,7 +125,7 @@ for (var i in npcs) {
       npcs[i].x = npcs[i].x - npcs[i].xspeed - Math.random() + Math.random();
       npcs[i].y = npcs[i].y + npcs[i].yspeed - Math.random() + Math.random();
       if (npcs[i].name == "alien" && (turn_count % 9 == 0 || turn_count % 11 == 0)){
-        add_enemy_unit('alien_rocket',npcs[i].x,npcs[i].y);
+        add_enemy_unit('alien_rocket',npcs[i].x,npcs[i].y,npcs[i].xspeed,npcs[i].yspeed);
       }              
     }
   }
@@ -141,10 +141,19 @@ for (var j in chars) {
       chars[j].x = chars[j].x + chars[j].xspeed;
       chars[j].y = chars[j].y - chars[j].yspeed;
       chars[j].time_active++;
-      chars[j].yspeed = chars[j].yspeed - .02;
-      if (chars[j].time_active > 100) {
+      if (chars[j].name == 'pogo_plane'){
+        if (chars[j].yspeed > -1){
+          chars[j].yspeed = chars[j].yspeed - .006;
+        }
+      } else {
+        chars[j].yspeed = chars[j].yspeed - .02;
+      }
+      if (chars[j].time_active > 100 && (chars[j].name == 'pylon_rocket' || chars[j].name == 'pogo_rocket')) {
         delete chars[j];
         //active_npcs_count--;
+      } else if ( chars[j].time_active > 190 &&  chars[j].name == 'pogo_plane'){
+        delete chars[j];
+        active_chars_count--;
       }
     }
     if (chars[j].name == 'icbm') {
@@ -158,8 +167,9 @@ for (var j in chars) {
          add_unit('pylon_rocket',chars[j].x,chars[j].y);
         }  
     }else if (chars[j].name == 'pogo_plane') {
-              
-         add_unit('pogo_rocket',chars[j].x,chars[j].y);
+         if (turn_count % 4 == 0 || turn_count % 5 == 0 ) {     
+           add_unit('pogo_rocket',chars[j].x,chars[j].y,chars[j].xspeed,chars[j].yspeed);
+         }
          chars[j].x = chars[j].x + chars[j].xspeed - Math.random() + Math.random();
          chars[j].y = chars[j].y - Math.random() + Math.random();
           
@@ -288,7 +298,8 @@ game_base.draw = function() {
         _canvasBufferContext.fillText("z = ghost 300", 10, 130);
         _canvasBufferContext.fillText("r = icbm 200", 10, 145);
         _canvasBufferContext.fillText("x = defense pylon 500", 10, 160);
-        _canvasBufferContext.fillText("p = pause", 10, 175);
+        _canvasBufferContext.fillText("t = pogo plane 200", 10, 175);
+        _canvasBufferContext.fillText("p = pause", 10, 190);
         _canvasBufferContext.fillStyle    = 'rgba(1000, 1000, 1000, 0.9)';
         _canvasBufferContext.fillText('Science Force = ', 10, 520);
 	_canvasBufferContext.fillText(active_chars_count, 140, 520);
@@ -349,7 +360,7 @@ game_base.draw = function() {
   _canvasContext.drawImage(_canvasBuffer, 0 , 0);	
 }
 
-add_unit = function (char_name,x,y) {
+add_unit = function (char_name,x,y,xspeed,yspeed) {
 
   var char = new unit(char_name);
   if (science < char.cost || player_cooldown < char.cooldown) {
@@ -371,7 +382,8 @@ add_unit = function (char_name,x,y) {
     chars[chars_count].y = y;
     chars[chars_count].yspeed = 2 * Math.random();
     if (chars[chars_count].name == 'pogo_rocket'){
-      chars[chars_count].yspeed = - 2 * Math.random();
+      chars[chars_count].xspeed = xspeed + 3 * Math.random();
+      chars[chars_count].yspeed = yspeed - 2 * Math.random();
     }
     chars[chars_count].xspeed = 3;
     chars[chars_count].time_active = 0;    

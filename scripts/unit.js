@@ -485,8 +485,8 @@ var get_characters = function() {
   };
 
   characters['pogo_plane'] = {
-    "cooldown": 100,
-    "cost": 1,
+    "cooldown": 20,
+    "cost": 200,
     "melee_damage": 15,
     "height": 63,
     "hp": 300,
@@ -494,10 +494,10 @@ var get_characters = function() {
     "image": "pogo_plane.png",
     "spawn_keys": ['t'],
     "yspeed": 0,
-    "xspeed": 2,
+    "xspeed": 2.5,
     "width": 64,
-    "x": 200,
-    "y": 275,
+    "x": 50,
+    "y": 300,
     "name" : 'pogo_plane',
     "time_active": 0,
   };
@@ -505,9 +505,9 @@ var get_characters = function() {
  characters['pogo_rocket'] = {
     "cooldown": 0,
     "cost": 0,
-    "melee_damage": 3,
+    "melee_damage": 6,
     "height": 24,
-    "hp": 8,
+    "hp": 16,
     "starting_hp": 8,
     "image": "alien_rocket.png",
     "spawn_keys": [],
