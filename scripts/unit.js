@@ -423,7 +423,7 @@ var get_characters = function() {
     "image": "alien.png",
     "spawn_keys": [],
     "yspeed": 0,
-    "xspeed": 3,
+    "xspeed": 1,
     "width": 24,
     "x": 924,
     "y": 460,

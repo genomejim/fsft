@@ -148,7 +148,7 @@ for (var j in chars) {
       } else {
         chars[j].yspeed = chars[j].yspeed - .02;
       }
-      if (chars[j].time_active > 100 && (chars[j].name == 'pylon_rocket' || chars[j].name == 'pogo_rocket')) {
+      if (chars[j].time_active > 75 && (chars[j].name == 'pylon_rocket' || chars[j].name == 'pogo_rocket')) {
         delete chars[j];
         //active_npcs_count--;
       } else if ( chars[j].time_active > 190 &&  chars[j].name == 'pogo_plane'){
