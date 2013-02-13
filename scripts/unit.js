@@ -505,9 +505,9 @@ var get_characters = function() {
  characters['pogo_rocket'] = {
     "cooldown": 0,
     "cost": 0,
-    "melee_damage": 6,
+    "melee_damage": 7,
     "height": 24,
-    "hp": 16,
+    "hp": 24,
     "starting_hp": 8,
     "image": "alien_rocket.png",
     "spawn_keys": [],

@@ -308,7 +308,7 @@ game_base.draw = function() {
 	_canvasBufferContext.fillText(lair.hp, 670, 5);
         _canvasBufferContext.fillText('superstition = ', 770, 5);
 	_canvasBufferContext.fillText(superstition, 880, 5);
-        _canvasBufferContext.fillText('v 0.4.1', 960, 5);
+        _canvasBufferContext.fillText('v 0.4.2', 960, 5);
         _canvasBufferContext.fillStyle    = 'rgba(100, 100, 100, 0.5)';
         _canvasBufferContext.fillText("w = flying scientist 7", 10, 25);
         _canvasBufferContext.fillText("a = giant trooper 100",10, 40);
