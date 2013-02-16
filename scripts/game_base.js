@@ -179,6 +179,17 @@ for (var j in chars) {
       chars[j].y = chars[j].y - Math.random() + Math.random();
                   
     }
+    if (emily_count > 0) {
+       if (chars[j].hp < chars[j].starting_hp){
+         chars[j].hp = chars[j].hp + 1;
+       
+         if (turn_count % 3 == 0) {
+           var heal = new collision(chars[j].x,chars[j].y,2,2);
+           heals[heal_count++] = heal;
+         }
+    }
+    }
+       
   }
 }
 }
@@ -192,9 +203,16 @@ function melee_combat_detection() {
         if (!npcs[i] || !chars[j]) {
           continue; // avoid deleted elements
         }
-         
-
-      if (Math.abs(chars[j].x - npcs[i].x) < 50 && Math.abs(chars[j].y - npcs[i].y) < 50)  {                
+      if (turn_count % 10 == 0){
+        chars[j].xspeed = chars[j].starting_xspeed;
+        npcs[i].xspeed = npcs[i].starting_xspeed;   
+      }
+      if (Math.abs(chars[j].x - npcs[i].x) < 50 && Math.abs(chars[j].y - npcs[i].y) < 50)  {
+        //units stop to fight
+        chars[j].xspeed = 0;
+        chars[j].yspeed = 0;
+        npcs[i].xspeed = 0;
+        npcs[i].yspeed = 0;                
         //npc deals melee damage to character
 
         //add collision to collisions
@@ -207,6 +225,8 @@ function melee_combat_detection() {
           //attack player speed
           chars[j].xspeed = ( -Math.random() * 0.1 );
           chars[j].yspeed = ( -Math.random() * 0.1 );
+          chars[j].starting_xspeed = ( -Math.random() * 0.1 );
+          chars[j].starting_yspeed = ( -Math.random() * 0.1 );
         } else {
           chars[j].hp = chars[j].hp - npcs[i].melee_damage;
         }        
@@ -214,6 +234,7 @@ function melee_combat_detection() {
         if (chars[j].name == 'ghost'){
         //attack enemy speed and damage
           npcs[i].xspeed = 0;
+          npcs[i].starting_xspeed = 0;
           if ( i != 0) {
             npcs[i].melee_damage = npcs[i].melee_damage - 7;
           }
@@ -226,6 +247,9 @@ function melee_combat_detection() {
             if (npcs[i].name == 'alien_rocket'){
               active_npcs_count++;
             }
+            //reset movement speed of victor
+            chars[j].xspeed = chars[j].starting_xspeed;
+            chars[j].yspeed = chars[j].starting_yspeed;
             delete npcs[i];
             active_npcs_count--;
             score++;
@@ -261,7 +285,14 @@ function melee_combat_detection() {
             active_chars_count--;
             score--;
           }
-          if (chars[j].name != 'lab'){
+          if (chars[j].name == 'energy_emily'){
+            delete chars[j];
+            emily_count--;
+          }
+          else if (chars[j].name != 'lab'){
+            //reset movement speed of victor
+            npcs[i].xspeed = npcs[i].starting_xspeed;
+            npcs[i].yspeed = npcs[i].starting_yspeed;
             delete chars[j];
           }
           
@@ -308,7 +339,7 @@ game_base.draw = function() {
 	_canvasBufferContext.fillText(lair.hp, 670, 5);
         _canvasBufferContext.fillText('superstition = ', 770, 5);
 	_canvasBufferContext.fillText(superstition, 880, 5);
-        _canvasBufferContext.fillText('v 0.4.2', 960, 5);
+        _canvasBufferContext.fillText('v 0.5.0', 960, 5);
         _canvasBufferContext.fillStyle    = 'rgba(100, 100, 100, 0.5)';
         _canvasBufferContext.fillText("w = flying scientist 7", 10, 25);
         _canvasBufferContext.fillText("a = giant trooper 100",10, 40);
@@ -322,6 +353,8 @@ game_base.draw = function() {
         _canvasBufferContext.fillText("x = defense pylon 500", 10, 160);
         _canvasBufferContext.fillText("t = pogo plane 200", 10, 175);
         _canvasBufferContext.fillText("p = pause", 10, 190);
+        _canvasBufferContext.fillStyle    = 'rgba(1000, 1000, 1000, 0.65)';
+        _canvasBufferContext.fillText("1 = energy emily 500 ", 10, 205);
         _canvasBufferContext.fillStyle    = 'rgba(1000, 1000, 1000, 0.9)';
         _canvasBufferContext.fillText('Science Force = ', 10, 520);
 	_canvasBufferContext.fillText(active_chars_count, 140, 520);
@@ -378,6 +411,21 @@ game_base.draw = function() {
         delete collisions[k];
     }
   }
+
+for (var m in heals) {
+    if (heals[m].display_time > 0) {
+      _canvasBufferContext.strokeStyle = 'rgba(0, 600, 0, 0.35)';
+      _canvasBufferContext.lineWidth   = 5;
+      _canvasBufferContext.beginPath();
+      _canvasBufferContext.arc(heals[m].x,heals[m].y,heals[m].radius,1.5* Math.PI ,.5 * Math.PI);
+      _canvasBufferContext.stroke();
+      _canvasBufferContext.closePath();
+      heals[m].radius = heals[m].radius + 24;
+      heals[m].display_time--;
+    } else {
+        delete heals[m];
+    }
+  }
   	
   _canvasContext.drawImage(_canvasBuffer, 0 , 0);	
 }
@@ -385,6 +433,13 @@ game_base.draw = function() {
 add_unit = function (char_name,x,y,xspeed,yspeed) {
 
   var char = new unit(char_name);
+  if (char.name == 'energy_emily' && emily_count > 0){
+    return 1;
+  } 
+  else if (char.name == 'energy_emily' && science > char.cost) {
+    emily_count++;
+  }
+  
   if (science < char.cost || player_cooldown < char.cooldown) {
     return 0;
   }

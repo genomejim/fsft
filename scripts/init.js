@@ -4,6 +4,7 @@
   var chars = new Object;
   var npcs = new Object;
   var collisions = new Object;
+  var heals = new Object;
 
 // clocks and counts
   var score = 1500;
@@ -17,11 +18,13 @@
   var active_chars_count = 0;
   var active_npcs_count = 0;
   var collision_count = 0;
+  var heal_count = 0;
   var grogon_text = 0;
   var active_level = 1;
   var level_display_name = "Howl on the Moon!";
   var spray_speed = 2;
   var pylon_spawn_x = 25;
+  var emily_count = 0;
 
   var snd = new Audio("./content/sounds/Howl.m4a");
   snd.play();
@@ -39,6 +42,7 @@ KEY_CODES = {
       'r': [82],
       'x': [88],
       't': [84],
+      '1': [49],
 };
 
 
