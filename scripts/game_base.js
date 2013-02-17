@@ -238,7 +238,18 @@ function melee_combat_detection() {
           if ( i != 0) {
             npcs[i].melee_damage = npcs[i].melee_damage - 7;
           }
-	}
+	} else if (chars[j].name == 'energy_emily'){
+            //make the enemy fly into the air and then fall, finally disappearing
+            
+            npcs[i].xspeed = -2;
+            npcs[i].yspeed = 4;
+            npcs[i].starting_xspeed = -2;
+            npcs[i].starting_yspeed = ( -Math.random() * 0.1 );
+            if (npcs[i].name != 'alien_rocket'){
+              active_npcs_count--;
+            }
+            npcs[i].name = 'alien_rocket';
+        }
         else {
           npcs[i].hp = npcs[i].hp - chars[j].melee_damage;
         }
