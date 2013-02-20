@@ -7,6 +7,7 @@ game_base.update = function(event) {
 
   player_unit_spawning(event);
   enemy_unit_spawning();
+  update_buttons();
   unit_movement();
   melee_combat_detection();
 }
@@ -48,59 +49,6 @@ enemy_unit_spawning = function() {
 
 unit_movement = function() {
 
-//set button opacity based on cooldown
-  rect1.setOpacity(player_cooldown/15); //scientist
-  rect2.setOpacity(player_cooldown/20); //trooper
-  rect3.setOpacity(player_cooldown/10); //pylon
-  rect4.setOpacity(player_cooldown/15); //giant trooper
-  rect5.setOpacity(player_cooldown/15); //grogon
-  rect6.setOpacity(player_cooldown/15); //rocket
-  rect7.setOpacity(player_cooldown/15); //scientist
-  //rect8.setOpacity(player_cooldown/15); //scientist
-//set button color based on available science
-  if (science < 5) {
-    rect1.setFill('gray'); //scientist
-    rect1.setOpacity(.3);
-  } else {
-    rect1.setFill('green'); //scientist
-  }
-  if (science < 10) {
-    rect2.setFill('gray'); //trooper
-    rect2.setOpacity(.3);
-  } else {
-    rect2.setFill('green'); //trooper
-  }
-  if (science < 10) {
-    rect3.setFill('gray'); //pylon
-    rect3.setOpacity(.3);
-  } else {
-    rect3.setFill('green'); //pylon
-  }
-  if (science < 100) {
-    rect4.setFill('gray'); //giant trooper
-    rect4.setOpacity(.3);
-  } else {
-    rect4.setFill('green'); //giant trooper
-  }
-  if (science < 1000) {
-    rect5.setFill('gray'); //grogon
-    rect5.setOpacity(.3);
-  } else {
-    rect5.setFill('green'); //grogon
-  }
-  if (science < 5) {
-    rect6.setFill('gray'); //rocket
-    rect6.setOpacity(.3);
-  } else {
-    rect6.setFill('green'); //rocket
-  }
-  if (science < 300) {
-    rect7.setFill('gray'); //ghost
-    rect7.setOpacity(.3);
-  } else {
-    rect7.setFill('green'); //ghost
-  }
-  button_layer.draw();
 
 for (var i in npcs) {
   if (i != 0){
@@ -114,7 +62,9 @@ for (var i in npcs) {
       npcs[i].yspeed = npcs[i].yspeed - .03;
       if (npcs[i].time_active > 200) {
         delete npcs[i];
-        //active_npcs_count--;
+        if (npcs[i].unit_count == "true"){
+          active_npcs_count--;
+        }
       }
       if (npcs[i].yspeed > 5) {
         npcs[i].yspeed = npcs[i].yspeed + 3 * npcs[i].yspeed;
@@ -134,9 +84,7 @@ for (var i in npcs) {
 for (var j in chars) {
   if (j != 0){
 
-//    chars[j].img.style.opacity = chars[j].hp / chars[j].starting_hp;
-    chars[j].img.style.filter       = "alpha(opacity=75)";
-
+    // move rockets and the plane
     if (chars[j].name == 'pylon_rocket' || chars[j].name == 'pogo_rocket' || chars[j].name == 'pogo_plane'){
       chars[j].x = chars[j].x + chars[j].xspeed;
       chars[j].y = chars[j].y - chars[j].yspeed;
@@ -150,31 +98,42 @@ for (var j in chars) {
       }
       if (chars[j].time_active > 75 && (chars[j].name == 'pylon_rocket' || chars[j].name == 'pogo_rocket')) {
         delete chars[j];
-        //active_npcs_count--;
+        if (chars[j].unit_count == "true"){
+          active_chars_count--;
+        }        
       } else if ( chars[j].time_active > 190 &&  chars[j].name == 'pogo_plane'){
         delete chars[j];
-        active_chars_count--;
+        if (chars[j].unit_count == "true"){
+          active_chars_count--;
+        }
       }
     }
+
+    //move the icbm
     if (chars[j].name == 'icbm') {
       chars[j].x = chars[j].x + chars[j].xspeed;
       chars[j].y = chars[j].y + chars[j].yspeed;
       chars[j].yspeed = chars[j].yspeed + .1;
       
-    }else if (chars[j].name == 'pylon' || chars[j].name == 'defense_pylon') {
-       //pylons don't move, they are pylons
-       if (chars[j].name == "defense_pylon" && turn_count % 5 == 0){
-         add_unit('pylon_rocket',chars[j].x,chars[j].y);
-        }  
-    }else if (chars[j].name == 'pogo_plane') {
-         if (turn_count % 4 == 0 || turn_count % 5 == 0 ) {     
-           add_unit('pogo_rocket',chars[j].x,chars[j].y,chars[j].xspeed,chars[j].yspeed);
-         }
-         chars[j].x = chars[j].x + chars[j].xspeed - Math.random() + Math.random();
-         chars[j].y = chars[j].y - Math.random() + Math.random();
+    }
+
+    //dont move pylons, have the defense pylon and pogo plane spawn rockets
+    if (chars[j].name == 'pylon' || chars[j].name == 'defense_pylon') {
+      //pylons don't move, they are pylons
+      if (chars[j].name == "defense_pylon" && turn_count % 5 == 0){
+        add_unit('pylon_rocket',chars[j].x,chars[j].y);
+      }  
+    }
+    else if (chars[j].name == 'pogo_plane') {
+      if (turn_count % 4 == 0 || turn_count % 5 == 0 ) {     
+        add_unit('pogo_rocket',chars[j].x,chars[j].y,chars[j].xspeed,chars[j].yspeed);
+      }
+        chars[j].x = chars[j].x + chars[j].xspeed - Math.random() + Math.random();
+        chars[j].y = chars[j].y - Math.random() + Math.random();
           
     }
     else {
+      //the default case for unit movement (with bounce)
       chars[j].x = chars[j].x + chars[j].xspeed - Math.random() + Math.random();
       chars[j].y = chars[j].y - Math.random() + Math.random();
                   
@@ -235,6 +194,7 @@ function melee_combat_detection() {
         //attack enemy speed and damage
           npcs[i].xspeed = 0;
           npcs[i].starting_xspeed = 0;
+          chars[j].xspeed = chars[j].starting_xspeed;
           if ( i != 0) {
             npcs[i].melee_damage = npcs[i].melee_damage - 7;
           }
@@ -242,12 +202,12 @@ function melee_combat_detection() {
             //make the enemy fly into the air and then fall, finally disappearing
             
             npcs[i].xspeed = -2;
-            npcs[i].yspeed = 4;
+            npcs[i].yspeed = 6 * Math.random() ;
             npcs[i].starting_xspeed = -2;
             npcs[i].starting_yspeed = ( -Math.random() * 0.1 );
-            if (npcs[i].name != 'alien_rocket'){
-              active_npcs_count--;
-            }
+            //if (npcs[i].unit_count == "true"){
+            //  active_npcs_count--;
+            //}
             npcs[i].name = 'alien_rocket';
         }
         else {
@@ -255,15 +215,16 @@ function melee_combat_detection() {
         }
         if (npcs[i].hp <= 0) {
           if (i != 0) {
-            if (npcs[i].name == 'alien_rocket'){
-              active_npcs_count++;
-            }
+            
             //reset movement speed of victor
             chars[j].xspeed = chars[j].starting_xspeed;
             chars[j].yspeed = chars[j].starting_yspeed;
             delete npcs[i];
-            active_npcs_count--;
-            score++;
+            if (npcs[i].unit_count == "true"){
+               active_npcs_count--;
+               score++;
+            }
+            
             
           }
         }
@@ -291,19 +252,25 @@ function melee_combat_detection() {
           //  level1();
             
           }
-          if (chars[j].name == 'pylon_rocket' || chars[j].name == 'pogo_rocket' ){
-          } else {
+          if (chars[j].name == 'pylon_rocket' || chars[j].name == 'pogo_rocket' || chars[j].name == 'rocket' ){
+          } else if (chars[j].unit_count == "true"){
             active_chars_count--;
             score--;
           }
-          if (chars[j].name == 'energy_emily'){
-            delete chars[j];
+          if (chars[j].name == 'energy_emily'){            
             emily_count--;
+            if (chars[j].unit_count == "true"){
+              active_chars_count--;
+            }
+            delete chars[j];
           }
           else if (chars[j].name != 'lab'){
             //reset movement speed of victor
             npcs[i].xspeed = npcs[i].starting_xspeed;
-            npcs[i].yspeed = npcs[i].starting_yspeed;
+            npcs[i].yspeed = npcs[i].starting_yspeed;            
+            if (chars[j].unit_count == "true"){
+              active_chars_count--;
+            }
             delete chars[j];
           }
           
@@ -444,6 +411,7 @@ for (var m in heals) {
 add_unit = function (char_name,x,y,xspeed,yspeed) {
 
   var char = new unit(char_name);
+  //don't allow more than one hero unit in play at a time
   if (char.name == 'energy_emily' && emily_count > 0){
     return 1;
   } 
@@ -451,39 +419,49 @@ add_unit = function (char_name,x,y,xspeed,yspeed) {
     emily_count++;
   }
   
+  //don't add a unit if there is not enough science to pay for it 
+  //or if the cooldown time is not satisfied
   if (science < char.cost || player_cooldown < char.cooldown) {
     return 0;
   }
+
+  //don't add a pylon if there are already 75 active units
   if (active_chars_count >= 75 && char_name == "pylon") {
     return 0;
   }
+
+  //add unit
   chars[chars_count] = char;
+
+  //calculate position to add pylons
   if (chars[chars_count].name == 'pylon'){
     chars[chars_count].x = pylon_spawn_x;
     pylon_spawn_x = pylon_spawn_x + 2;
     if (pylon_spawn_x > 105){
       pylon_spawn_x = 26;
     }
-  } 
+  }
+
+  //add rockets with the velocity and position of the unit that fired them 
   if (chars[chars_count].name == 'pylon_rocket' || chars[chars_count].name == 'pogo_rocket'){
     chars[chars_count].x = x;
     chars[chars_count].y = y;
-    chars[chars_count].yspeed = 2 * Math.random();
-    if (chars[chars_count].name == 'pogo_rocket'){
-      chars[chars_count].xspeed = xspeed + 3 * Math.random();
-      chars[chars_count].yspeed = yspeed - 2 * Math.random();
+    if (chars[chars_count].name == 'pylon_rocket'){
+      chars[chars_count].yspeed = 2 * Math.random();
+      chars[chars_count].xspeed = 3;
     }
-    chars[chars_count].xspeed = 3;
+    else if (chars[chars_count].name == 'pogo_rocket'){
+      chars[chars_count].xspeed = xspeed + 3 * Math.random();
+      chars[chars_count].yspeed = yspeed - 3 * Math.random();
+    }
+    
     chars[chars_count].time_active = 0;    
   }  else {
-    active_chars_count++;     
+    if(chars[chars_count].unit_count == "true"){
+      active_chars_count++;
+    }     
     player_cooldown = 0;
-    //display cooldown by changing button opacity - moved to game loop
-    //rect1.setOpacity(.1);
-    //rect1.setFill('red');
-    //button_layer.draw();
-  }
-  //chars[chars_count].img.style.filter = "alpha(opacity=75)";
+     } 
   chars_count++;    
   science = science - char.cost;
   return 1;
@@ -503,17 +481,71 @@ add_enemy_unit = function(npc_name,x,y){
           npcs[npcs_count].y = y;
           npcs[npcs_count].yspeed = 1.5 * Math.random();
           npcs[npcs_count].xspeed = 5;
-          npcs[npcs_count].time_active = 0;
-          //active_npcs_count--;
-          
-          
+          npcs[npcs_count].time_active = 0;                   
    } else {
-     active_npcs_count++;
+     if (npcs[npcs_count].unit_count == "true"){
+       active_npcs_count++;
+     }
+     npcs[npcs_count].starting_xspeed = npcs[npcs_count].starting_xspeed * Math.random();
    }
-  npcs_count++;
-  //active_npcs_count++;
+  npcs_count++;  
   superstition = superstition - npc.cost;        
   return npc;
 }    
 
 
+update_buttons = function(){
+  //set button opacity based on cooldown
+  rect1.setOpacity(player_cooldown/15); //scientist
+  rect2.setOpacity(player_cooldown/20); //trooper
+  rect3.setOpacity(player_cooldown/10); //pylon
+  rect4.setOpacity(player_cooldown/15); //giant trooper
+  rect5.setOpacity(player_cooldown/15); //grogon
+  rect6.setOpacity(player_cooldown/15); //rocket
+  rect7.setOpacity(player_cooldown/15); //scientist
+  //rect8.setOpacity(player_cooldown/15); //scientist
+  //set button color based on available science
+  if (science < 5) {
+    rect1.setFill('gray'); //scientist
+    rect1.setOpacity(.3);
+  } else {
+    rect1.setFill('green'); //scientist
+  }
+  if (science < 10) {
+    rect2.setFill('gray'); //trooper
+    rect2.setOpacity(.3);
+  } else {
+    rect2.setFill('green'); //trooper
+  }
+  if (science < 10) {
+    rect3.setFill('gray'); //pylon
+    rect3.setOpacity(.3);
+  } else {
+    rect3.setFill('green'); //pylon
+  }
+  if (science < 100) {
+    rect4.setFill('gray'); //giant trooper
+    rect4.setOpacity(.3);
+  } else {
+    rect4.setFill('green'); //giant trooper
+  }
+  if (science < 1000) {
+    rect5.setFill('gray'); //grogon
+    rect5.setOpacity(.3);
+  } else {
+    rect5.setFill('green'); //grogon
+  }
+  if (science < 5) {
+    rect6.setFill('gray'); //rocket
+    rect6.setOpacity(.3);
+  } else {
+    rect6.setFill('green'); //rocket
+  }
+  if (science < 300) {
+    rect7.setFill('gray'); //ghost
+    rect7.setOpacity(.3);
+  } else {
+    rect7.setFill('green'); //ghost
+  }
+  button_layer.draw();
+}
