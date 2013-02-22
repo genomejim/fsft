@@ -53,27 +53,36 @@ unit_movement = function() {
 for (var i in npcs) {
   if (i != 0){
 
-    npcs[i].img.style.opacity = npcs[i].hp / npcs[i].starting_hp;
 
     if (npcs[i].name == 'alien_rocket'){
+      //plain jane movement
       npcs[i].x = npcs[i].x - npcs[i].xspeed;
       npcs[i].y = npcs[i].y - npcs[i].yspeed;
+
+      //increment time active so unit will time out
       npcs[i].time_active++;
+
+      //this unit affected by gravity
       npcs[i].yspeed = npcs[i].yspeed - .03;
+
+      //remove unit after 200 turns
       if (npcs[i].time_active > 200) {
-        delete npcs[i];
-        if (npcs[i].unit_count == "true"){
-          active_npcs_count--;
-        }
+        remove_unit(npcs[i],i);
       }
-      if (npcs[i].yspeed > 5) {
-        npcs[i].yspeed = npcs[i].yspeed + 3 * npcs[i].yspeed;
-      }else if (npcs[i].yspeed < -5) {
-        npcs[i].yspeed = npcs[i].yspeed - 3 * npcs[i].yspeed;
-      }
+
+      
+      
     } else {
-      npcs[i].x = npcs[i].x - npcs[i].xspeed - Math.random() + Math.random();
-      npcs[i].y = npcs[i].y + npcs[i].yspeed - Math.random() + Math.random();
+
+      //trying non random wiggly movement for a while 
+      npcs[i].x = npcs[i].x - npcs[i].xspeed; 
+      if (turn_count  % 30 >= 15) {
+        npcs[i].y = npcs[i].y - npcs[i].yspeed - .3;
+      } else {
+        npcs[i].y = npcs[i].y - npcs[i].yspeed + .3;
+      }
+
+      //periodically add rockets fired by the alien
       if (npcs[i].name == "alien" && (turn_count % 9 == 0 || turn_count % 11 == 0)){
         add_enemy_unit('alien_rocket',npcs[i].x,npcs[i].y,npcs[i].xspeed,npcs[i].yspeed);
       }              
@@ -89,6 +98,8 @@ for (var j in chars) {
       chars[j].x = chars[j].x + chars[j].xspeed;
       chars[j].y = chars[j].y - chars[j].yspeed;
       chars[j].time_active++;
+
+      //pogo plane affected by gravity
       if (chars[j].name == 'pogo_plane'){
         if (chars[j].yspeed > -1){
           chars[j].yspeed = chars[j].yspeed - .006;
@@ -97,24 +108,23 @@ for (var j in chars) {
         chars[j].yspeed = chars[j].yspeed - .02;
       }
       if (chars[j].time_active > 75 && (chars[j].name == 'pylon_rocket' || chars[j].name == 'pogo_rocket')) {
-        delete chars[j];
-        if (chars[j].unit_count == "true"){
-          active_chars_count--;
-        }        
+        remove_unit(chars[j],j);
+         
       } else if ( chars[j].time_active > 190 &&  chars[j].name == 'pogo_plane'){
-        delete chars[j];
-        if (chars[j].unit_count == "true"){
-          active_chars_count--;
-        }
+        remove_unit(chars[j],j);
+        
       }
     }
 
     //move the icbm
     if (chars[j].name == 'icbm') {
+      //plain jane movement
       chars[j].x = chars[j].x + chars[j].xspeed;
       chars[j].y = chars[j].y + chars[j].yspeed;
-      chars[j].yspeed = chars[j].yspeed + .1;
       
+      //icbm moving affected by gravity
+      chars[j].yspeed = chars[j].yspeed + .1;
+      continue;
     }
 
     //dont move pylons, have the defense pylon and pogo plane spawn rockets
@@ -134,8 +144,14 @@ for (var j in chars) {
     }
     else {
       //the default case for unit movement (with bounce)
-      chars[j].x = chars[j].x + chars[j].xspeed - Math.random() + Math.random();
-      chars[j].y = chars[j].y - Math.random() + Math.random();
+
+      //trying movement without random bounce
+      chars[j].x = chars[j].x + chars[j].xspeed;
+      if (turn_count  % 30 >= 15) {
+        chars[j].y = chars[j].y - chars[j].yspeed - .3;
+      } else {
+        chars[j].y = chars[j].y - chars[j].yspeed + .3;
+      }
                   
     }
     if (emily_count > 0) {
@@ -175,11 +191,12 @@ function melee_combat_detection() {
         //npc deals melee damage to character
 
         //add collision to collisions
-        var coll = new collision(chars[j].x,chars[j].y,2,npcs[i].melee_damage);
-        var coll1 = new collision(npcs[i].x,npcs[i].y,2,chars[j].melee_damage);        
-        collisions[collision_count++] = coll;
-        collisions[collision_count++] = coll1;
-        
+        if (turn_count % 2 == 0) {
+          var coll = new collision(chars[j].x,chars[j].y,2,npcs[i].melee_damage);
+          var coll1 = new collision(npcs[i].x,npcs[i].y,2,chars[j].melee_damage);        
+          collisions[collision_count++] = coll;
+          collisions[collision_count++] = coll1;
+        }
         if (npcs[i].name == 'repulsor'){
           //attack player speed
           chars[j].xspeed = ( -Math.random() * 0.1 );
@@ -205,9 +222,7 @@ function melee_combat_detection() {
             npcs[i].yspeed = 6 * Math.random() ;
             npcs[i].starting_xspeed = -2;
             npcs[i].starting_yspeed = ( -Math.random() * 0.1 );
-            //if (npcs[i].unit_count == "true"){
-            //  active_npcs_count--;
-            //}
+            //set unit name to make it obey gravity and begin timeout clock (this doesnt so much work)
             npcs[i].name = 'alien_rocket';
         }
         else {
@@ -219,9 +234,8 @@ function melee_combat_detection() {
             //reset movement speed of victor
             chars[j].xspeed = chars[j].starting_xspeed;
             chars[j].yspeed = chars[j].starting_yspeed;
-            delete npcs[i];
+            remove_unit(npcs[i],i);
             if (npcs[i].unit_count == "true"){
-               active_npcs_count--;
                score++;
             }
             
@@ -235,43 +249,31 @@ function melee_combat_detection() {
             lair.hp=10000;
             superstition = 100;
             turn_count = 0;
-            active_chars_count = 0;
-            active_npcs_count = 0;
             active_level = 1; 
             for (var i in chars) {
               if (i != 0) {
-                delete chars[i];
+                remove_unit(chars[i],i);
               }
           }
             for (var j in npcs) {
               if (j != 0) {
-                delete npcs[j];
+                remove_unit(npcs[j],j);
               }
           }
           //window.alert("Restarting with Level 1");
           //  level1();
             
           }
-          if (chars[j].name == 'pylon_rocket' || chars[j].name == 'pogo_rocket' || chars[j].name == 'rocket' ){
-          } else if (chars[j].unit_count == "true"){
-            active_chars_count--;
-            score--;
-          }
+          
           if (chars[j].name == 'energy_emily'){            
             emily_count--;
-            if (chars[j].unit_count == "true"){
-              active_chars_count--;
-            }
-            delete chars[j];
+            remove_unit(chars[j],j);            
           }
           else if (chars[j].name != 'lab'){
             //reset movement speed of victor
             npcs[i].xspeed = npcs[i].starting_xspeed;
             npcs[i].yspeed = npcs[i].starting_yspeed;            
-            if (chars[j].unit_count == "true"){
-              active_chars_count--;
-            }
-            delete chars[j];
+            remove_unit(chars[j],j);
           }
           
           
@@ -317,7 +319,7 @@ game_base.draw = function() {
 	_canvasBufferContext.fillText(lair.hp, 670, 5);
         _canvasBufferContext.fillText('superstition = ', 770, 5);
 	_canvasBufferContext.fillText(superstition, 880, 5);
-        _canvasBufferContext.fillText('v 0.5.0', 960, 5);
+        _canvasBufferContext.fillText('v 0.5.0t', 960, 5);
         _canvasBufferContext.fillStyle    = 'rgba(100, 100, 100, 0.5)';
         _canvasBufferContext.fillText("w = flying scientist 7", 10, 25);
         _canvasBufferContext.fillText("a = giant trooper 100",10, 40);
@@ -356,22 +358,20 @@ game_base.draw = function() {
     _canvasBufferContext.fillText("SCIENCE MUST PREVAIL!", 375, 375);
     _canvasBufferContext.font="bold 15px sans-serif";  
   }
-  if (grogon_text > 0){
-    _canvasBufferContext.fillStyle = 'rgba(0, 500, 0, 0.5)';
-    _canvasBufferContext.font="bold 30px sans-serif";
-    _canvasBufferContext.fillText("GIVE US A SAMPLING OF YOUR POWER", 200, 375);
-    _canvasBufferContext.font="bold 15px sans-serif";
-    grogon_text--;
-  }
+  
         
 //draw active npcs and collisions
 
   for (var i in npcs) {
+    _canvasBufferContext.globalAlpha =  npcs[i].hp / npcs[i].starting_hp + .2;  
     _canvasBufferContext.drawImage(npcs[i].img, npcs[i].x - npcs[i].width / 2, npcs[i].y - npcs[i].height / 2);
+    _canvasBufferContext.globalAlpha =  1;
   }   
 
   for (var j in chars) {
+    _canvasBufferContext.globalAlpha =  chars[j].hp / chars[j].starting_hp + .2; 
     _canvasBufferContext.drawImage(chars[j].img, chars[j].x - chars[j].width / 2 , chars[j].y - chars[j].height / 2);
+    _canvasBufferContext.globalAlpha =  1;
   }
  
 
@@ -493,6 +493,22 @@ add_enemy_unit = function(npc_name,x,y){
   return npc;
 }    
 
+remove_unit = function(unit,unit_hash_key) {
+
+  if (unit.unit_count == "true" && unit.allegiance == "science") {
+    active_chars_count--;  
+  }
+  if (unit.unit_count == "true" && unit.allegiance == "superstition") {
+    active_npcs_count--;  
+  }
+  if (unit.allegiance == "science") {
+    delete chars[unit_hash_key];
+  }
+  if (unit.allegiance == "superstition") {
+    delete npcs[unit_hash_key];
+  }
+     
+}
 
 update_buttons = function(){
   //set button opacity based on cooldown

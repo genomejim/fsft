@@ -7,7 +7,8 @@ unit = function(character_name) {
   this.cost = attr.cost;
   this.cooldown = attr.cooldown;
   this.time_active = attr.time_active;
-  this.unit_count = attr.unit_count
+  this.unit_count = attr.unit_count;
+  this.allegiance = attr.allegiance;
 
   //location
   this.x = attr.x;
@@ -64,6 +65,7 @@ var get_characters = function() {
     "unit_count" : "false",
     "gravity" : "false",
     "mobile" : "false",
+    "allegiance" : "science",
   };
 
   characters['lair'] = {
@@ -86,6 +88,7 @@ var get_characters = function() {
     "unit_count" : "false",
     "gravity" : "false",
     "mobile" : "false",
+    "allegiance" : "superstition",
   };
 
   characters['scientist'] = {
@@ -108,6 +111,7 @@ var get_characters = function() {
     "unit_count" : "true",
     "gravity" : "false",
     "mobile" : "false",
+    "allegiance" : "science",
   };
 
   characters['flying_scientist'] = {
@@ -130,6 +134,7 @@ var get_characters = function() {
     "unit_count" : "true",
     "gravity" : "false",
     "mobile" : "false",
+    "allegiance" : "science",
   };
 
   characters['science_trooper'] = {
@@ -152,6 +157,7 @@ var get_characters = function() {
     "unit_count" : "true",
     "gravity" : "false",
     "mobile" : "false",
+    "allegiance" : "science",     
   };
 
   characters['giant_trooper'] = {
@@ -174,6 +180,7 @@ var get_characters = function() {
     "unit_count" : "true",
     "gravity" : "false",
     "mobile" : "false",
+    "allegiance" : "science",
   };
 
   characters['pylon'] = {
@@ -196,6 +203,7 @@ var get_characters = function() {
     "unit_count" : "true",
     "gravity" : "false",
     "mobile" : "false",
+    "allegiance" : "science",
   };
 
   characters['grogon'] = {
@@ -218,6 +226,7 @@ var get_characters = function() {
     "unit_count" : "true",
     "gravity" : "false",
     "mobile" : "false",
+    "allegiance" : "science",
   };
 
   characters['rocket'] = {
@@ -240,6 +249,7 @@ var get_characters = function() {
     "unit_count" : "false",
     "gravity" : "false",
     "mobile" : "false",
+    "allegiance" : "science",
   };
  
   characters['evil_scientist'] = {
@@ -262,6 +272,7 @@ var get_characters = function() {
     "unit_count" : "true",
     "gravity" : "false",
     "mobile" : "false",
+    "allegiance" : "superstition",
   };
 
   characters['bat'] = {
@@ -284,6 +295,7 @@ var get_characters = function() {
     "unit_count" : "true",
     "gravity" : "false",
     "mobile" : "false",
+    "allegiance" : "superstition",
   };
 
   characters['werewolf'] = {
@@ -306,6 +318,7 @@ var get_characters = function() {
     "unit_count" : "true",
     "gravity" : "false",
     "mobile" : "false",
+    "allegiance" : "superstition",
   };
 
   characters['vampire'] = {
@@ -328,6 +341,7 @@ var get_characters = function() {
     "unit_count" : "true",
     "gravity" : "false",
     "mobile" : "false",
+    "allegiance" : "superstition",
   };
 
   characters['evil_giant_robot'] = {
@@ -350,6 +364,7 @@ var get_characters = function() {
     "unit_count" : "true",
     "gravity" : "false",
     "mobile" : "false",
+    "allegiance" : "superstition",
   };
 
   characters['evil_pylon'] = {
@@ -372,6 +387,7 @@ var get_characters = function() {
     "unit_count" : "true",
     "gravity" : "false",
     "mobile" : "false",
+    "allegiance" : "superstition",
   };
 
   characters['beast'] = {
@@ -394,6 +410,7 @@ var get_characters = function() {
     "unit_count" : "true",
     "gravity" : "false",
     "mobile" : "false",
+    "allegiance" : "superstition",
   };
 
   characters['mole'] = {
@@ -416,6 +433,7 @@ var get_characters = function() {
     "unit_count" : "true",
     "gravity" : "false",
     "mobile" : "false",
+    "allegiance" : "superstition",
   };
 
   characters['evil_grogon'] = {
@@ -438,6 +456,7 @@ var get_characters = function() {
     "unit_count" : "true",
     "gravity" : "false",
     "mobile" : "false",
+    "allegiance" : "superstition",
   };
 
   characters['evil_rocket'] = {
@@ -460,6 +479,7 @@ var get_characters = function() {
     "unit_count" : "false",
     "gravity" : "false",
     "mobile" : "false",
+    "allegiance" : "superstition",
   };
 
   characters['ghost'] = {
@@ -482,6 +502,7 @@ var get_characters = function() {
     "unit_count" : "true",
     "gravity" : "false",
     "mobile" : "false",
+    "allegiance" : "science",
   };
 
   characters['repulsor'] = {
@@ -504,11 +525,12 @@ var get_characters = function() {
     "unit_count" : "false",
     "gravity" : "false",
     "mobile" : "false",
+    "allegiance" : "superstition",
   };
 
   characters['icbm'] = {
     "cooldown": 10,
-    "cost": 200,
+    "cost": 100,
     "melee_damage": 100,
     "height": 48,
     "hp": 50,
@@ -516,8 +538,8 @@ var get_characters = function() {
     "image": "icbm.png",
     "spawn_keys": ['r'],
     "yspeed": -5.5,
-    "xspeed": 8,
-    "starting_xspeed": 8,
+    "xspeed": 7,
+    "starting_xspeed": 7,
     "starting_yspeed": -5.5,
     "width": 48,
     "x": 50,
@@ -526,6 +548,7 @@ var get_characters = function() {
     "unit_count" : "false",
     "gravity" : "false",
     "mobile" : "false",
+    "allegiance" : "science",
   };
 
   characters['alien'] = {
@@ -548,6 +571,7 @@ var get_characters = function() {
     "unit_count" : "true",
     "gravity" : "false",
     "mobile" : "false",
+    "allegiance" : "superstition",
   };
 
   characters['alien_rocket'] = {
@@ -571,6 +595,7 @@ var get_characters = function() {
     "unit_count" : "false",
     "gravity" : "false",
     "mobile" : "false",
+    "allegiance" : "superstition",
   };
 
   characters['defense_pylon'] = {
@@ -594,6 +619,7 @@ var get_characters = function() {
     "unit_count" : "true",
     "gravity" : "false",
     "mobile" : "false",
+    "allegiance" : "science",
   };
 
   characters['pylon_rocket'] = {
@@ -617,6 +643,7 @@ var get_characters = function() {
     "unit_count" : "false",
     "gravity" : "false",
     "mobile" : "false",
+    "allegiance" : "science",
   };
 
   characters['pogo_plane'] = {
@@ -640,6 +667,7 @@ var get_characters = function() {
     "unit_count" : "true",
     "gravity" : "false",
     "mobile" : "false",
+    "allegiance" : "science",
   };
 
  characters['pogo_rocket'] = {
@@ -663,11 +691,12 @@ var get_characters = function() {
     "unit_count" : "false",
     "gravity" : "false",
     "mobile" : "false",
+    "allegiance" : "science",
   };
 
 characters['energy_emily'] = {
     "cooldown": 0,
-    "cost": 1,
+    "cost": 500,
     "melee_damage": 1,
     "height": 24,
     "hp": 500,
@@ -686,6 +715,7 @@ characters['energy_emily'] = {
     "unit_count" : "true",
     "gravity" : "false",
     "mobile" : "false",
+    "allegiance" : "science",
   };
 
   return characters;
