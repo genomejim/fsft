@@ -50,7 +50,12 @@ enemy_unit_spawning = function() {
 unit_movement = function() {
 
 
+
 for (var i in npcs) {
+  if (!npcs[i]) {
+    continue; // avoid deleted elements
+  }
+
   if (i != 0){
 
 
@@ -60,13 +65,13 @@ for (var i in npcs) {
       npcs[i].y = npcs[i].y - npcs[i].yspeed;
 
       //increment time active so unit will time out
-      npcs[i].time_active++;
+      npcs[i].age++;
 
       //this unit affected by gravity
       npcs[i].yspeed = npcs[i].yspeed - .03;
 
       //remove unit after 200 turns
-      if (npcs[i].time_active > 200) {
+      if (npcs[i].age > npcs[i].maximum_age) {
         remove_unit(npcs[i],i);
       }
 
@@ -92,12 +97,14 @@ for (var i in npcs) {
 
 for (var j in chars) {
   if (j != 0){
-
+    if (!chars[j]) {
+      continue; // avoid deleted elements
+    }
     // move rockets and the plane
     if (chars[j].name == 'pylon_rocket' || chars[j].name == 'pogo_rocket' || chars[j].name == 'pogo_plane'){
       chars[j].x = chars[j].x + chars[j].xspeed;
       chars[j].y = chars[j].y - chars[j].yspeed;
-      chars[j].time_active++;
+      chars[j].age++;
 
       //pogo plane affected by gravity
       if (chars[j].name == 'pogo_plane'){
@@ -107,10 +114,10 @@ for (var j in chars) {
       } else {
         chars[j].yspeed = chars[j].yspeed - .02;
       }
-      if (chars[j].time_active > 75 && (chars[j].name == 'pylon_rocket' || chars[j].name == 'pogo_rocket')) {
+      if (chars[j].age > 75 && (chars[j].name == 'pylon_rocket' || chars[j].name == 'pogo_rocket')) {
         remove_unit(chars[j],j);
          
-      } else if ( chars[j].time_active > 190 &&  chars[j].name == 'pogo_plane'){
+      } else if ( chars[j].age > 190 &&  chars[j].name == 'pogo_plane'){
         remove_unit(chars[j],j);
         
       }
@@ -192,8 +199,8 @@ function melee_combat_detection() {
 
         //add collision to collisions
         if (turn_count % 2 == 0) {
-          var coll = new collision(chars[j].x,chars[j].y,2,npcs[i].melee_damage);
-          var coll1 = new collision(npcs[i].x,npcs[i].y,2,chars[j].melee_damage);        
+          var coll = new collision(chars[j].x,chars[j].y,2,npcs[i].melee_damage/2);
+          var coll1 = new collision(npcs[i].x,npcs[i].y,2,chars[j].melee_damage/2);        
           collisions[collision_count++] = coll;
           collisions[collision_count++] = coll1;
         }
@@ -223,7 +230,8 @@ function melee_combat_detection() {
             npcs[i].starting_xspeed = -2;
             npcs[i].starting_yspeed = ( -Math.random() * 0.1 );
             //set unit name to make it obey gravity and begin timeout clock (this doesnt so much work)
-            npcs[i].name = 'alien_rocket';
+            npcs[i].maximum_age = npcs[i].age + 200;
+            npcs[i].affected_by_gravity = "true";
         }
         else {
           npcs[i].hp = npcs[i].hp - chars[j].melee_damage;
@@ -235,7 +243,7 @@ function melee_combat_detection() {
             chars[j].xspeed = chars[j].starting_xspeed;
             chars[j].yspeed = chars[j].starting_yspeed;
             remove_unit(npcs[i],i);
-            if (npcs[i].unit_count == "true"){
+            if (npcs[i].contributes_science == "true"){
                score++;
             }
             
@@ -376,6 +384,9 @@ game_base.draw = function() {
  
 
   for (var k in collisions) {
+    if (!collisions[k]) {
+          continue; // avoid deleted elements
+        }
     if (collisions[k].display_time > 0) {
       _canvasBufferContext.strokeStyle = 'rgba(200, 0, 0, 0.25)';
       _canvasBufferContext.lineWidth   = 5;
@@ -455,9 +466,9 @@ add_unit = function (char_name,x,y,xspeed,yspeed) {
       chars[chars_count].yspeed = yspeed - 3 * Math.random();
     }
     
-    chars[chars_count].time_active = 0;    
+    chars[chars_count].age = 0;    
   }  else {
-    if(chars[chars_count].unit_count == "true"){
+    if(chars[chars_count].contributes_science == "true"){
       active_chars_count++;
     }     
     player_cooldown = 0;
@@ -481,9 +492,9 @@ add_enemy_unit = function(npc_name,x,y){
           npcs[npcs_count].y = y;
           npcs[npcs_count].yspeed = 1.5 * Math.random();
           npcs[npcs_count].xspeed = 5;
-          npcs[npcs_count].time_active = 0;                   
+          npcs[npcs_count].age = 0;                   
    } else {
-     if (npcs[npcs_count].unit_count == "true"){
+     if (npcs[npcs_count].contributes_science == "true"){
        active_npcs_count++;
      }
      npcs[npcs_count].starting_xspeed = npcs[npcs_count].starting_xspeed * Math.random();
@@ -495,10 +506,10 @@ add_enemy_unit = function(npc_name,x,y){
 
 remove_unit = function(unit,unit_hash_key) {
 
-  if (unit.unit_count == "true" && unit.allegiance == "science") {
+  if (unit.contributes_science == "true" && unit.allegiance == "science") {
     active_chars_count--;  
   }
-  if (unit.unit_count == "true" && unit.allegiance == "superstition") {
+  if (unit.contributes_science == "true" && unit.allegiance == "superstition") {
     active_npcs_count--;  
   }
   if (unit.allegiance == "science") {

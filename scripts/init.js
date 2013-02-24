@@ -1,8 +1,9 @@
 
 
 // create objects to use as associative arrays 
-  var chars = new Object;
-  var npcs = new Object;
+  //var chars = new Object;
+  //var npcs = new Object;
+  var units = new Object;
   var collisions = new Object;
   var heals = new Object;
 
@@ -10,8 +11,9 @@
   var score = 1500;
   var science = 100;
   var superstition = 100;
-  var chars_count = 0;
-  var npcs_count = 0;
+  //var chars_count = 0;
+  //var npcs_count = 0;
+  var units_count = 0;
   var turn_count = 0;
   var player_cooldown = 100;
   game_base.fps = 50;
@@ -80,13 +82,17 @@ SPAWN = get_key_codes(CHR);
 
 
   var lab = new unit("lab");
-  chars[chars_count] = lab;
-  chars_count++;
+  units[units_count] = lab;
+  units_count++;
+  //chars[chars_count] = lab;
+  //chars_count++;
 
   //var lab = add_unit('lab');
   var lair = new unit("lair");
-  npcs[npcs_count] = lair;
-  npcs_count++;
+  units[units_count] = lair;
+  units_count++;
+  //npcs[npcs_count] = lair;
+  //npcs_count++;
 
 //background image
   var back = new Image();
