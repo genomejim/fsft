@@ -18,6 +18,7 @@ unit = function(character_name) {
   this.starting_xspeed = attr.starting_xspeed;
   this.starting_yspeed = attr.starting_yspeed;
 
+  this.gravity = attr.gravity;
   this.affected_by_gravity = attr.affected_by_gravity;
   this.is_mobile = attr.is_mobile;
   
@@ -68,6 +69,7 @@ var get_characters = function() {
     "allegiance" : "science",
     "age" : 0,
     "maximum_age" : 0,
+    "gravity" : 0,
   };
 
   characters['lair'] = {
@@ -93,6 +95,7 @@ var get_characters = function() {
     "allegiance" : "superstition",
     "age" : 0,
     "maximum_age" : 0,
+    "gravity" : 0,
   };
 
   characters['scientist'] = {
@@ -118,6 +121,7 @@ var get_characters = function() {
     "allegiance" : "science",
     "age" : 0,
     "maximum_age" : 0,
+    "gravity" : 0,
   };
 
   characters['flying_scientist'] = {
@@ -143,6 +147,7 @@ var get_characters = function() {
     "allegiance" : "science",
     "age" : 0,
     "maximum_age" : 0,
+    "gravity" : 0,
   };
 
   characters['science_trooper'] = {
@@ -168,6 +173,7 @@ var get_characters = function() {
     "allegiance" : "science",     
     "age" : 0,
     "maximum_age" : 0,
+    "gravity" : 0,
   };
 
   characters['giant_trooper'] = {
@@ -193,6 +199,7 @@ var get_characters = function() {
     "allegiance" : "science",
     "age" : 0,
     "maximum_age" : 0,
+    "gravity" : 0,
   };
 
   characters['pylon'] = {
@@ -218,6 +225,7 @@ var get_characters = function() {
     "allegiance" : "science",
     "age" : 0,
     "maximum_age" : 0,
+    "gravity" : 0,
   };
 
   characters['grogon'] = {
@@ -243,6 +251,7 @@ var get_characters = function() {
     "allegiance" : "science",
     "age" : 0,
     "maximum_age" : 0,
+    "gravity" : 0,
   };
 
   characters['rocket'] = {
@@ -268,6 +277,7 @@ var get_characters = function() {
     "allegiance" : "science",
     "age" : 0,
     "maximum_age" : 0,
+    "gravity" : 0,
   };
  
   characters['evil_scientist'] = {
@@ -293,6 +303,7 @@ var get_characters = function() {
     "allegiance" : "superstition",
     "age" : 0,
     "maximum_age" : 0,
+    "gravity" : 0,
   };
 
   characters['bat'] = {
@@ -318,6 +329,7 @@ var get_characters = function() {
     "allegiance" : "superstition",
     "age" : 0,
     "maximum_age" : 0,
+    "gravity" : 0,
   };
 
   characters['werewolf'] = {
@@ -343,6 +355,7 @@ var get_characters = function() {
     "allegiance" : "superstition",
     "age" : 0,
     "maximum_age" : 0,
+    "gravity" : 0,
   };
 
   characters['vampire'] = {
@@ -368,6 +381,7 @@ var get_characters = function() {
     "allegiance" : "superstition",
     "age" : 0,
     "maximum_age" : 0,
+    "gravity" : 0,
   };
 
   characters['evil_giant_robot'] = {
@@ -393,6 +407,7 @@ var get_characters = function() {
     "allegiance" : "superstition",
     "age" : 0,
     "maximum_age" : 0,
+    "gravity" : 0,
   };
 
   characters['evil_pylon'] = {
@@ -418,6 +433,7 @@ var get_characters = function() {
     "allegiance" : "superstition",
     "age" : 0,
     "maximum_age" : 0,
+    "gravity" : 0,
   };
 
   characters['beast'] = {
@@ -443,6 +459,7 @@ var get_characters = function() {
     "allegiance" : "superstition",
     "age" : 0,
     "maximum_age" : 0,
+    "gravity" : 0,
   };
 
   characters['mole'] = {
@@ -468,6 +485,7 @@ var get_characters = function() {
     "allegiance" : "superstition",
     "age" : 0,
     "maximum_age" : 0,
+    "gravity" : 0,
   };
 
   characters['evil_grogon'] = {
@@ -493,6 +511,7 @@ var get_characters = function() {
     "allegiance" : "superstition",
     "age" : 0,
     "maximum_age" : 0,
+    "gravity" : 0,
   };
 
   characters['evil_rocket'] = {
@@ -518,6 +537,7 @@ var get_characters = function() {
     "allegiance" : "superstition",
     "age" : 0,
     "maximum_age" : 0,
+    "gravity" : 0,
   };
 
   characters['ghost'] = {
@@ -543,6 +563,7 @@ var get_characters = function() {
     "allegiance" : "science",
     "age" : 0,
     "maximum_age" : 0,
+    "gravity" : 0,
   };
 
   characters['repulsor'] = {
@@ -568,6 +589,7 @@ var get_characters = function() {
     "allegiance" : "superstition",
     "age" : 0,
     "maximum_age" : 0,
+    "gravity" : 0,
   };
 
   characters['icbm'] = {
@@ -593,6 +615,7 @@ var get_characters = function() {
     "allegiance" : "science",
     "age" : 0,
     "maximum_age" : 0,
+    "gravity" : .3,
   };
 
   characters['alien'] = {
@@ -618,6 +641,7 @@ var get_characters = function() {
     "allegiance" : "superstition",
     "age" : 0,
     "maximum_age" : 0,
+    "gravity" : 0,
   };
 
   characters['alien_rocket'] = {
@@ -643,6 +667,7 @@ var get_characters = function() {
     "allegiance" : "superstition",
     "age" : 0,
     "maximum_age" : 0,
+    "gravity" : .3,
   };
 
   characters['defense_pylon'] = {
@@ -668,6 +693,7 @@ var get_characters = function() {
     "allegiance" : "science",
     "age" : 0,
     "maximum_age" : 0,
+    "gravity" : 0,
   };
 
   characters['pylon_rocket'] = {
@@ -693,6 +719,7 @@ var get_characters = function() {
     "allegiance" : "science",
     "age" : 0,
     "maximum_age" : 0,
+    "gravity" : .3,
   };
 
   characters['pogo_plane'] = {
@@ -718,6 +745,7 @@ var get_characters = function() {
     "allegiance" : "science",
     "age" : 0,
     "maximum_age" : 0,
+    "gravity" : .3,
   };
 
  characters['pogo_rocket'] = {
@@ -743,6 +771,7 @@ var get_characters = function() {
     "allegiance" : "science",
     "age" : 0,
     "maximum_age" : 0,
+    "gravity" : .3,
   };
 
 characters['energy_emily'] = {
@@ -768,6 +797,7 @@ characters['energy_emily'] = {
     "allegiance" : "science",
     "age" : 0,
     "maximum_age" : 0,
+    "gravity" : 0,
   };
 
   return characters;
