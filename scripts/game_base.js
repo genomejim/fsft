@@ -61,11 +61,15 @@ unit_movement = function() {
 
         if (units[i].affected_by_gravity == "TRUE"){
             units[i].x = units[i].x - units[i].xspeed;
-            units[i].y = units[i].y - units[i].yspeed;
-            units[i].yspeed = units[i].yspeed - units[i].gravity;      
+            units[i].y = units[i].y + units[i].yspeed;
+            units[i].yspeed = units[i].yspeed + units[i].gravity;      
         }else{
-            //this periodic bouncing movement is meant to evoke walking 
-            units[i].x = units[i].x - units[i].xspeed; 
+            //this periodic bouncing movement is meant to evoke walking
+            if (units[i].allegiance == 'science'){ 
+                units[i].x = units[i].x + units[i].xspeed;
+            } else if (units[i].allegiance == 'superstition') {
+                units[i].x = units[i].x - units[i].xspeed;
+            }
             if (turn_count  % 30 >= 15) {
                 units[i].y = units[i].y - units[i].yspeed - .3;
             } else {
@@ -81,14 +85,14 @@ unit_movement = function() {
             add_unit('pylon_rocket',units[i].x,units[i].y);
         }  
         if (units[i].name == 'pogo_plane' && (turn_count % 4 == 0 || turn_count % 5 == 0 )) {     
-            add_unit('pogo_rocket',chars[j].x,chars[j].y,chars[j].xspeed,chars[j].yspeed);
+            add_unit('pogo_rocket',units[i].x,units[i].y,units[i].xspeed,units[i].yspeed);
         }
         //if emily is active heal friendly units
         if (emily_count > 0 && units[i].allegiance == 'science') {
             if (units[i].hp < units[i].starting_hp){
                 units[i].hp = units[i].hp + 2;
             if (turn_count % 3 == 0) {
-                var heal = new collision(chars[j].x,chars[j].y,2,2);
+                var heal = new collision(units[i].x,units[i].y,2,2);
                 heals[heal_count++] = heal;
             }
         }
@@ -112,8 +116,8 @@ function melee_combat_detection() {
         }
         //during the combat loop we will only act on the object units (j)
         for (var j in units) {
-            if (!units[j] || i == j) {
-                continue; // avoid deleted elements and prevent a unit from acting on itself
+            if (!units[j] || i == j || units[i].allegiance == units[j].allegiance) {
+                continue; // avoid deleted elements and prevent a unit from acting on itself or own team
             }
             //detect proximity of units to start fights
             if (Math.abs(units[i].x - units[j].x) < 50 && Math.abs(units[i].y - units[j].y) < 50)  {
@@ -139,7 +143,7 @@ function melee_combat_detection() {
                     units[j].starting_xspeed = 0;
                     units[i].xspeed = units[i].starting_xspeed;
                     if ( units[j].name != 'lair') {
-                        npcs[i].melee_damage = npcs[i].melee_damage - 7;
+                        units[i].melee_damage = units[i].melee_damage - 7;
                     }
                 } else if (units[i].name == 'energy_emily'){
                     //make the enemy fly into the air and then fall, finally disappearing

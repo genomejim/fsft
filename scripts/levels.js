@@ -287,14 +287,9 @@ function level_transition(){
     active_npcs_count = 0;
     emily_count = 0;
     active_level++; 
-    for (var i in chars) {
-      if (i != 0) {
+    for (var i in units) {
+      if (i != 0 || i != 1) {
         delete chars[i];
-      }
-    }
-    for (var j in npcs) {
-      if (j != 0) {
-        delete npcs[j];
       }
     }
 }
