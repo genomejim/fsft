@@ -1,68 +1,53 @@
 function level1(){
 
-
-if (lair.hp > 0) {
-
-  if (turn_count > 0 && turn_count % 10000 == 0  ){
-      superstition = superstition + 500;
-      add_enemy_unit('evil_grogon');
-  }
-  if (turn_count % 500 == 0 && Math.random() > .5){
-      add_enemy_unit('alien');
+    if (lair.hp > 0) {
+        if (turn_count > 0 && turn_count % 10000 == 0  ){
+            superstition = superstition + 500;
+            add_enemy_unit('evil_grogon');
+        }
+        if (turn_count % 500 == 0 && Math.random() > .5){
+            add_enemy_unit('alien');
+        }
+        if (turn_count % 35 == 0 && active_npcs_count < 20){
+            if (Math.random() > .5){
+                if (Math.random() * superstition > 85){    
+                    add_enemy_unit('evil_scientist');
+                }
+            } else {        
+                if (Math.random() * superstition > 85) {
+                    add_enemy_unit('werewolf');
+                }
+            }
+        }   
+    } else {
+        //level transition
+        level_transition();
+        window.alert("Starting Level 2");
     }
-  if (turn_count % 35 == 0 && active_npcs_count < 20){
-
-    if (Math.random() > .5){
-      if (Math.random() * superstition > 85){    
-        add_enemy_unit('evil_scientist');
-      }
-    } else {        
-      if (Math.random() * superstition > 85) {
-        add_enemy_unit('werewolf');
-      }
-    }
-
-    
-    
-    
-      
-  }
-   
-
-
-} else {
-    //level transition
-    level_transition();
-    window.alert("Starting Level 2");
 }
 
-}
+
 function level2(){
-level_display_name = "For Love and Rockets!";
-if (lair.hp > 0) {
 
-  
-if (npcs_count < 10000  && turn_count > 1000){
-    // spawn enemy rocket
-    if (Math.random()  > .9){
-      add_enemy_unit('evil_rocket');
+    level_display_name = "For Love and Rockets!";
+    if (lair.hp > 0) {  
+        if (npcs_count < 10000  && turn_count > 1000){
+            // spawn enemy rocket
+            if (Math.random()  > .9){
+                add_enemy_unit('evil_rocket');
+            }
+        }
+        if (turn_count % 200 == 0 && npcs_count < 10000){
+            // spawn repulsor
+            if (Math.random()  > .5){
+                add_enemy_unit('repulsor');
+            }
+        } 
+    } else {
+        //level transition
+        level_transition(); 
+        window.alert("Starting Level 3");
     }
-  }
-if (turn_count % 200 == 0 && npcs_count < 10000){
-    // spawn repulsor
-    if (Math.random()  > .5){
-      add_enemy_unit('repulsor');
-    }
-  } 
-
-} else {
-
-    //level transition
-    level_transition(); 
-    window.alert("Starting Level 3");
-    
-}
-
 }
 
 function level3(){

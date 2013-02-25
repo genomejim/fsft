@@ -1,8 +1,7 @@
 
 
 // create objects to use as associative arrays 
-  //var chars = new Object;
-  //var npcs = new Object;
+
   var units = new Object;
   var collisions = new Object;
   var heals = new Object;
@@ -108,7 +107,7 @@ if (_canvas && _canvas.getContext) {
 
     _canvasBuffer.width = _canvas.width;
     
-_canvasBuffer.height = _canvas.height;
+    _canvasBuffer.height = _canvas.height;
     _canvasBufferContext = _canvasBuffer.getContext('2d');
 
     _canvasBufferContext.fillStyle    = '#00f';

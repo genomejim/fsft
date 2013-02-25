@@ -13,8 +13,8 @@ unit = function(character_name) {
   //location
   this.x = attr.x;
   this.y = attr.y;
-  this.xspeed = attr.xspeed
-  this.yspeed = attr.yspeed
+  this.xspeed = attr.xspeed;
+  this.yspeed = attr.yspeed;
   this.starting_xspeed = attr.starting_xspeed;
   this.starting_yspeed = attr.starting_yspeed;
 
@@ -33,7 +33,7 @@ unit = function(character_name) {
 
   //defensive combat stats
   this.hp = attr.hp;
-  this.starting_hp = attr.starting_hp
+  this.starting_hp = attr.starting_hp;
 
   //offensive combat stats
   this.melee_damage = attr.melee_damage;
